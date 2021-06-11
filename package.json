@@ -1,0 +1,14 @@
+{
+  "name": "mishu",
+  "version": "0.1.0",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "node dist/test/index.js",
+    "build": "tsc",
+    "watch": "tsc -w"
+  },
+  "repository": "https://github.com/wrule/mishu.git",
+  "author": "wrule <1982775886@qq.com>",
+  "license": "MIT",
+  "private": false
+}
