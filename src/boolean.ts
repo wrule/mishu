@@ -1,18 +1,21 @@
 import { IStruct } from './struct';
+import { EType } from './type';
 
 export class Boolean implements IStruct {
   public readonly Name: string;
 
+  public readonly Type: EType;
+
   public Equal(struct: IStruct): boolean {
-    return true;
+    return this.Type === struct.Type;
   }
 
   public Compare(struct: IStruct): number {
-    return 0;
+    return this.Type === struct.Type ? 1 : 0;
   }
 
   public Contain(struct: IStruct): boolean {
-    return false;
+    return this.Type === struct.Type;
   }
 
   public Merge(struct: IStruct): IStruct {
@@ -27,5 +30,6 @@ export class Boolean implements IStruct {
     name: string,
   ) {
     this.Name = name;
+    this.Type = EType.Boolean;
   }
 }

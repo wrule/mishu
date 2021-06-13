@@ -1,9 +1,14 @@
+import { EType } from './type';
 
 export interface IStruct {
   /**
    * 结构名称
    */
   Name: string;
+  /**
+   * 结构类型
+   */
+  Type: EType,
   /**
    * 判断此结构与传入结构是否相等
    */
