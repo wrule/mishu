@@ -1,8 +1,8 @@
-import { IStruct } from './struct';
+import { IField } from './field';
 import { EType } from './type';
 import { Hash } from './utils/hash';
 
-export class Number implements IStruct {
+export class Number implements IField {
   public readonly Name: string;
 
   public readonly Type: EType;
@@ -11,23 +11,23 @@ export class Number implements IStruct {
     return Hash(`${this.Name}:${this.Type}`);
   }
 
-  public Equal(struct: IStruct): boolean {
-    return this.Type === struct.Type;
+  public Equal(field: IField): boolean {
+    return this.Type === field.Type;
   }
 
-  public Compare(struct: IStruct): number {
-    return this.Type === struct.Type ? 1 : 0;
+  public Compare(field: IField): number {
+    return this.Type === field.Type ? 1 : 0;
   }
 
-  public Contain(struct: IStruct): boolean {
-    return this.Type === struct.Type;
+  public Contain(field: IField): boolean {
+    return this.Type === field.Type;
   }
 
-  public Merge(struct: IStruct): IStruct {
+  public Merge(field: IField): IField {
     return { } as any;
   }
 
-  public Diff(struct: IStruct): any[] {
+  public Diff(field: IField): any[] {
     return [];
   }
 
