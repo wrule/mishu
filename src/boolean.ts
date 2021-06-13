@@ -1,10 +1,15 @@
 import { IStruct } from './struct';
 import { EType } from './type';
+import { Hash } from './utils/hash';
 
 export class Boolean implements IStruct {
   public readonly Name: string;
 
   public readonly Type: EType;
+
+  public Hash() {
+    return Hash(`${this.Name}:${this.Type}`);
+  }
 
   public Equal(struct: IStruct): boolean {
     return this.Type === struct.Type;

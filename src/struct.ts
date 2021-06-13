@@ -12,7 +12,7 @@ export interface IStruct {
   /**
    * 结构的Hash
    */
-  Hash: string;
+  Hash(): string;
   /**
    * 判断此结构与传入结构是否相等
    */

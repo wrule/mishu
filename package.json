@@ -10,5 +10,8 @@
   "repository": "https://github.com/wrule/mishu.git",
   "author": "wrule <1982775886@qq.com>",
   "license": "MIT",
-  "private": false
+  "private": false,
+  "dependencies": {
+    "hasha": "^5.2.2"
+  }
 }
