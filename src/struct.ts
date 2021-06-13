@@ -10,6 +10,10 @@ export interface IStruct {
    */
   Type: EType,
   /**
+   * 结构的Hash
+   */
+  Hash: string;
+  /**
    * 判断此结构与传入结构是否相等
    */
   Equal(struct: IStruct): boolean;

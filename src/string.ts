@@ -6,6 +6,8 @@ export class String implements IStruct {
 
   public readonly Type: EType;
 
+  public readonly Hash: string = '';
+
   public Equal(struct: IStruct): boolean {
     return this.Type === struct.Type;
   }
