@@ -1,14 +1,20 @@
 import { IField } from './field';
 import { EType } from './type';
-import { Hash } from './utils/hash';
+import { StringHash } from './utils/stringHash';
 
 export class SObject implements IField {
   public readonly Name: string;
 
   public readonly Type: EType;
 
+  private fields: IField[];
+
   public Hash() {
-    return Hash(`${this.Name}:${this.Type}`);
+    return StringHash(
+      this.fields
+        .map((field) => field.Hash())
+        .join(';')
+    );
   }
 
   public Equal(field: IField): boolean {
@@ -33,8 +39,10 @@ export class SObject implements IField {
 
   public constructor(
     name: string,
+    fields: IField[],
   ) {
     this.Name = name;
     this.Type = EType.Object;
+    this.fields = fields;
   }
 }

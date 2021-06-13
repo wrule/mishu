@@ -1,6 +1,6 @@
 import Hasha from 'hasha';
 
-export function Hash(text: string) {
+export function StringHash(text: string) {
   return Hasha(text, {
     algorithm: 'sha1',
   });

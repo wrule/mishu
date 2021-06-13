@@ -1,6 +1,6 @@
 import { IField } from './field';
 import { EType } from './type';
-import { Hash } from './utils/hash';
+import { StringHash } from './utils/stringHash';
 
 export class String implements IField {
   public readonly Name: string;
@@ -8,7 +8,7 @@ export class String implements IField {
   public readonly Type: EType;
 
   public Hash() {
-    return Hash(`${this.Name}:${this.Type}`);
+    return StringHash(`${this.Name}:${this.Type}`);
   }
 
   public Equal(field: IField): boolean {
