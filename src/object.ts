@@ -46,7 +46,25 @@ export class ObjectField implements IField {
   }
 
   public Compare(field: IField): number {
-    return this.Type === field.Type ? 1 : 0;
+    if (field.Type === EType.Object) {
+      const objectField = field as ObjectField;
+      const maxLength = this.Fields.length > objectField.Fields.length ?
+        this.Fields.length :
+        objectField.Fields.length;
+      const cmpFields = this.Fields.filter(
+        (field) => objectField.FieldsMap.has(field.Name)
+      );
+      const passRate = cmpFields.length / maxLength;
+      let sum = 0;
+      cmpFields.forEach((field) => {
+        sum += field.Compare(
+          objectField.FieldsMap.get(field.Name) as IField
+        ) * 0.6 + 0.4;
+      });
+      return (sum / cmpFields.length) * passRate;
+    } else {
+      return 0;
+    }
   }
 
   public Contain(field: IField): boolean {
