@@ -1,5 +1,6 @@
 import { IField } from './field';
 import { EType } from './type';
+import { UndefinedField } from './undefined';
 import { StringHash } from './utils/stringHash';
 
 export class ObjectField implements IField {
@@ -80,7 +81,24 @@ export class ObjectField implements IField {
   }
 
   public Merge(field: IField): IField {
-    return { } as any;
+    if (field.Type === EType.Object) {
+      const objectField = field as ObjectField;
+      const similarity = this.Compare(objectField);
+      if (similarity > 0.2) {
+        const allFieldNames = this.Fields.map((field) => field.Name)
+          .concat(objectField.Fields.map((field) => field.Name));
+        const newFields = allFieldNames.map((name) => {
+          const field1 = this.FieldsMap.get(name) || new UndefinedField(name);
+          const field2 = objectField.FieldsMap.get(name) || new UndefinedField(name);
+          return field1.Merge(field2);
+        });
+        return new ObjectField(this.Name, newFields);
+      } else {
+        return { } as any;
+      }
+    } else {
+      return field.Merge(this);
+    }
   }
 
   public Diff(field: IField): any[] {
