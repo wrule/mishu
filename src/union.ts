@@ -2,7 +2,7 @@ import { IField } from './field';
 import { EType } from './type';
 import { StringHash } from './utils/stringHash';
 
-export class Union implements IField {
+export class UnionField implements IField {
   public readonly Name: string;
 
   public readonly Type: EType;

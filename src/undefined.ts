@@ -2,7 +2,7 @@ import { IField } from './field';
 import { EType } from './type';
 import { StringHash } from './utils/stringHash';
 
-export class Undefined implements IField {
+export class UndefinedField implements IField {
   public constructor(
     name: string,
   ) {

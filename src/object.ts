@@ -2,7 +2,7 @@ import { IField } from './field';
 import { EType } from './type';
 import { StringHash } from './utils/stringHash';
 
-export class SObject implements IField {
+export class ObjectField implements IField {
   public readonly Name: string;
 
   public readonly Type: EType;
