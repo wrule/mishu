@@ -3,12 +3,19 @@ import { EType } from './type';
 import { StringHash } from './utils/stringHash';
 
 export class Boolean implements IField {
+  public constructor(
+    name: string,
+  ) {
+    this.Name = name;
+    this.Type = EType.Boolean;
+  }
+
   public readonly Name: string;
 
   public readonly Type: EType;
 
   public Hash() {
-    return StringHash(`${this.Name}:${this.Type}`);
+    return StringHash(this.Type);
   }
 
   public Equal(field: IField): boolean {
@@ -29,12 +36,5 @@ export class Boolean implements IField {
 
   public Diff(field: IField): any[] {
     return [];
-  }
-
-  public constructor(
-    name: string,
-  ) {
-    this.Name = name;
-    this.Type = EType.Boolean;
   }
 }
