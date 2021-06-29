@@ -1,3 +1,4 @@
+import { ArrayField } from "./array";
 import { BooleanField } from "./boolean";
 import { DateField } from "./date";
 import { IField } from "./field";
@@ -5,6 +6,8 @@ import { NullField } from "./null";
 import { NumberField } from "./number";
 import { ObjectField } from "./object";
 import { StringField } from "./string";
+import { TupleField } from "./tuple";
+import { EType } from "./type";
 import { UndefinedField } from "./undefined";
 import { UnknowField } from "./unknow";
 
@@ -39,7 +42,16 @@ export function create(
       const fieldList = valueList.map(
         (value, index) => create(`element${index}`, value)
       );
-    } break;
+      let result = new UnknowField('element');
+      fieldList.forEach((field) => {
+        result = result.Merge(field);
+      });
+      if (result.Type !== EType.Union) {
+        return new ArrayField(name, result);
+      } else {
+        return new TupleField(name, fieldList);
+      }
+    }
   }
   return new UnknowField(name);
 }
