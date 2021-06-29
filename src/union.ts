@@ -24,7 +24,7 @@ export class UnionField implements IField {
 
   public Hash() {
     return StringHash(
-      this.members
+      this.Members
         .map((member) => member.Hash())
         .join('|')
     );

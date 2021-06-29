@@ -3,22 +3,35 @@ import { EType } from './type';
 import { StringHash } from './utils/stringHash';
 
 export class TupleField implements IField {
+  public constructor(
+    name: string,
+    elements: IField[],
+  ) {
+    this.Name = name;
+    this.Type = EType.Tuple;
+    this.elements = elements;
+  }
+
   public readonly Name: string;
 
   public readonly Type: EType;
 
   private elements: IField[];
 
+  public get Elements() {
+    return this.elements;
+  }
+
   public Hash() {
     return StringHash(
-      this.elements
+      this.Elements
         .map((element) => element.Hash())
         .join(',')
     );
   }
 
   public Equal(field: IField): boolean {
-    return this.Type === field.Type;
+    return this.Hash() === field.Hash();
   }
 
   public Compare(field: IField): number {
@@ -35,14 +48,5 @@ export class TupleField implements IField {
 
   public Diff(field: IField): any[] {
     return [];
-  }
-
-  public constructor(
-    name: string,
-    elements: IField[],
-  ) {
-    this.Name = name;
-    this.Type = EType.Tuple;
-    this.elements = elements;
   }
 }
