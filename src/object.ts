@@ -1,6 +1,7 @@
 import { IField } from './field';
 import { EType } from './type';
 import { UndefinedField } from './undefined';
+import { UnionField } from './union';
 import { StringHash } from './utils/stringHash';
 
 export class ObjectField implements IField {
@@ -84,7 +85,7 @@ export class ObjectField implements IField {
     if (field.Type === EType.Object) {
       const objectField = field as ObjectField;
       const similarity = this.Compare(objectField);
-      if (similarity > 0.2) {
+      if (similarity >= 0.2) {
         const allFieldNames = this.Fields.map((field) => field.Name)
           .concat(objectField.Fields.map((field) => field.Name));
         const newFields = allFieldNames.map((name) => {
@@ -94,7 +95,7 @@ export class ObjectField implements IField {
         });
         return new ObjectField(this.Name, newFields);
       } else {
-        return { } as any;
+        return new UnionField(this.Name, [this, objectField]);
       }
     } else {
       return field.Merge(this);

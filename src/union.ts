@@ -3,11 +3,24 @@ import { EType } from './type';
 import { StringHash } from './utils/stringHash';
 
 export class UnionField implements IField {
+  public constructor(
+    name: string,
+    members: IField[],
+  ) {
+    this.Name = name;
+    this.Type = EType.Union;
+    this.members = members;
+  }
+
   public readonly Name: string;
 
   public readonly Type: EType;
 
   private members: IField[];
+
+  public get Members() {
+    return this.members;
+  }
 
   public Hash() {
     return StringHash(
@@ -35,14 +48,5 @@ export class UnionField implements IField {
 
   public Diff(field: IField): any[] {
     return [];
-  }
-
-  public constructor(
-    name: string,
-    members: IField[],
-  ) {
-    this.Name = name;
-    this.Type = EType.Union;
-    this.members = members;
   }
 }
