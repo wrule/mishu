@@ -41,7 +41,14 @@ export class UnionField implements IField {
   }
 
   public Contain(field: IField): boolean {
-    return this.Type === field.Type;
+    if (field.Type === EType.Union) {
+      const unionField = field as UnionField;
+      return unionField.Members.every((member1) => (
+        this.Members.some((member2) => member2.Contain(member1))
+      ));
+    } else {
+      return this.Members.some((member) => member.Contain(field));
+    }
   }
 
   public Merge(field: IField): IField {
