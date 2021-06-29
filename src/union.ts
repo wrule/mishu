@@ -23,15 +23,17 @@ export class UnionField implements IField {
   }
 
   public Hash() {
+    const members = this.Members.slice(0);
+    members.sort((a, b) => a.Hash().localeCompare(b.Hash()));
     return StringHash(
-      this.Members
+      members
         .map((member) => member.Hash())
         .join('|')
     );
   }
 
   public Equal(field: IField): boolean {
-    return this.Type === field.Type;
+    return this.Hash() === field.Hash();
   }
 
   public Compare(field: IField): number {
