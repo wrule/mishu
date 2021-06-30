@@ -2,6 +2,7 @@ import { IField } from './field';
 import { EType } from './type';
 import { StringHash } from './utils';
 
+// TODO
 export class ArrayField implements IField {
   public constructor(
     name: string,
