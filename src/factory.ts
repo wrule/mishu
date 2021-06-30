@@ -45,7 +45,7 @@ export function create(
       // 数组结构内在相似性判断
       const similarities: number[] = [];
       for (let i = 0; i < fieldList.length - 1; ++i) {
-        for (let j = 1; i < fieldList.length; ++j) {
+        for (let j = i + 1; j < fieldList.length; ++j) {
           similarities.push(fieldList[i].Compare(fieldList[j]));
         }
       }
