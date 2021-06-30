@@ -44,7 +44,7 @@ export class ObjectField implements IField {
   }
 
   public Equal(field: IField): boolean {
-    return this.Hash() === field.Hash();
+    return field.Hash() === this.Hash();
   }
 
   public Compare(field: IField): number {
@@ -72,10 +72,13 @@ export class ObjectField implements IField {
   public Contain(field: IField): boolean {
     if (field.Type === EType.Object) {
       const objectField = field as ObjectField;
-      return objectField.Fields.every((field) => (
-        this.fieldsMap.has(field.Name) &&
-        this.fieldsMap.get(field.Name)?.Contain(field)
-      ));
+      return objectField.Fields.length === this.Fields.length &&
+        objectField.Fields.every(
+          (field) => this.FieldsMap.has(field.Name)
+        ) &&
+        objectField.Fields.every(
+          (field) => (this.FieldsMap.get(field.Name) as IField).Contain(field)
+        );
     } else {
       return false;
     }
@@ -86,8 +89,13 @@ export class ObjectField implements IField {
       const objectField = field as ObjectField;
       const similarity = this.Compare(objectField);
       if (similarity >= 0.2) {
-        const allFieldNames = this.Fields.map((field) => field.Name)
-          .concat(objectField.Fields.map((field) => field.Name));
+        const allFieldNames = Array.from(
+          new Set(
+            this.Fields
+              .map((field) => field.Name)
+              .concat(objectField.Fields.map((field) => field.Name))
+          )
+        );
         const newFields = allFieldNames.map((name) => {
           const field1 = this.FieldsMap.get(name) || new UndefinedField(name);
           const field2 = objectField.FieldsMap.get(name) || new UndefinedField(name);
