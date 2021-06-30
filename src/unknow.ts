@@ -14,25 +14,27 @@ export class UnknowField implements IField {
 
   public readonly Type: EType;
 
+  private static hash = StringHash(EType.Unknow);
+
   public Hash() {
-    return StringHash(this.Type);
+    return UnknowField.hash;
   }
 
   public Equal(field: IField): boolean {
-    return field.Type === EType.Unknow;
+    return false;
   }
 
   public Compare(field: IField): number {
-    return field.Type === EType.Unknow ? 1 : 0;
+    return 0;
   }
 
   public Contain(field: IField): boolean {
-    return true;
+    return false;
   }
 
   public Merge(field: IField): IField {
     if (field.Type === EType.Unknow) {
-      return this;
+      return new UnknowField(this.Name);
     } else {
       return field;
     }
