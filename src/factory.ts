@@ -49,7 +49,8 @@ export function create(
       }
       let sum = 0;
       similarities.forEach((similarity) => sum += similarity);
-      const similarity = sum / similarities.length;
+      const similarity = similarities.length > 0 ?
+        sum / similarities.length : 1;
       if (similarity >= 0.2) {
         let result = new UnknowField('element');
         fieldList.forEach((field) => {
