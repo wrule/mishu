@@ -1,6 +1,6 @@
 import { IField } from './field';
 import { EType } from './type';
-import { StringHash } from './utils/stringHash';
+import { StringHash } from './utils';
 
 export class UnknowField implements IField {
   public constructor(

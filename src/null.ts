@@ -1,7 +1,7 @@
 import { IField } from './field';
 import { EType } from './type';
 import { UnionField } from './union';
-import { StringHash } from './utils/stringHash';
+import { StringHash } from './utils';
 
 export class NullField implements IField {
   public constructor(

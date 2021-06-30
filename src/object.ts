@@ -2,7 +2,7 @@ import { IField } from './field';
 import { EType } from './type';
 import { UndefinedField } from './undefined';
 import { UnionField } from './union';
-import { StringHash } from './utils/stringHash';
+import { StringHash } from './utils';
 
 export class ObjectField implements IField {
   public constructor(
