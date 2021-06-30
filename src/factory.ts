@@ -7,7 +7,6 @@ import { NumberField } from "./number";
 import { ObjectField } from "./object";
 import { StringField } from "./string";
 import { TupleField } from "./tuple";
-import { EType } from "./type";
 import { UndefinedField } from "./undefined";
 import { UnknowField } from "./unknow";
 
@@ -38,8 +37,7 @@ export function create(
           ),
       );
     case '[object Array]': {
-      const valueList = value as any[];
-      const fieldList = valueList.map(
+      const fieldList = (value as any[]).map(
         (value, index) => create(`element${index}`, value)
       );
       // 数组结构内在相似性判断
