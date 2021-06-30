@@ -42,11 +42,21 @@ export function create(
       const fieldList = valueList.map(
         (value, index) => create(`element${index}`, value)
       );
-      let result = new UnknowField('element');
-      fieldList.forEach((field) => {
-        result = result.Merge(field);
-      });
-      if (result.Type !== EType.Union) {
+      // 数组结构内在相似性判断
+      const similarities: number[] = [];
+      for (let i = 0; i < fieldList.length - 1; ++i) {
+        for (let j = 1; i < fieldList.length; ++j) {
+          similarities.push(fieldList[i].Compare(fieldList[j]));
+        }
+      }
+      let sum = 0;
+      similarities.forEach((similarity) => sum += similarity);
+      const similarity = sum / similarities.length;
+      if (similarity >= 0.2) {
+        let result = new UnknowField('element');
+        fieldList.forEach((field) => {
+          result = result.Merge(field);
+        });
         return new ArrayField(name, result);
       } else {
         return new TupleField(name, fieldList);
