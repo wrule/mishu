@@ -1,14 +1,14 @@
-import { ArrayField } from "./array";
-import { BooleanField } from "./boolean";
-import { DateField } from "./date";
-import { IField } from "./field";
-import { NullField } from "./null";
-import { NumberField } from "./number";
-import { ObjectField } from "./object";
-import { StringField } from "./string";
-import { TupleField } from "./tuple";
-import { UndefinedField } from "./undefined";
-import { UnknowField } from "./unknow";
+import { ArrayField } from './array';
+import { BooleanField } from './boolean';
+import { DateField } from './date';
+import { IField } from './field';
+import { NullField } from './null';
+import { NumberField } from './number';
+import { ObjectField } from './object';
+import { StringField } from './string';
+import { TupleField } from './tuple';
+import { UndefinedField } from './undefined';
+import { UnknowField } from './unknow';
 
 export function create(
   name: string,
