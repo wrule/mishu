@@ -1,4 +1,5 @@
 import { IField } from './field';
+import { TupleField } from './tuple';
 import { EType } from './type';
 import { StringHash } from './utils';
 
@@ -44,6 +45,11 @@ export class ArrayField implements IField {
     if (field.Type === EType.Array) {
       const arrayField = field as ArrayField;
       return this.Element.Contain(arrayField.Element);
+    } else if (field.Type === EType.Tuple) {
+      const tupleField = field as TupleField;
+      return tupleField.Elements.every(
+        (element) => this.Element.Contain(element)
+      );
     } else {
       return false;
     }
