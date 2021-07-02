@@ -10,9 +10,7 @@ export abstract class TsField {
     this.Type = type;
   }
 
-  public Hash() {
-    return StringHash(this.Type);
-  }
+  public abstract Hash(): string;
 
   public Equal(field: TsField): boolean {
     return field.Type === this.Type;
