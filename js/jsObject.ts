@@ -1,3 +1,5 @@
+import { TsField } from '../ts/tsField';
+import { TsObject } from '../ts/tsObject';
 import { EType } from '../type';
 import { JsField } from './jsField';
 
@@ -18,6 +20,10 @@ export class JsObject extends JsField {
   }
 
   public ToTs() {
-    return new TsObject()
+    const tsFieldsMap = new Map<string, TsField>(
+      Array.from(this.fieldsMap.entries())
+        .map(([name, value]) => [name, value.ToTs()])
+    );
+    return new TsObject(this.Name, tsFieldsMap);
   }
 }
