@@ -1,3 +1,4 @@
+import { TsField } from '../ts/tsField';
 import { EType } from '../type';
 
 export abstract class JsField {
@@ -11,4 +12,6 @@ export abstract class JsField {
 
   public readonly Name: string;
   public readonly Type: EType;
+
+  public abstract ToTs(): TsField;
 }
