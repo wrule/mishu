@@ -1,5 +1,5 @@
+import { JsField } from '../js/jsField';
 import { EType } from '../type';
-import { StringHash } from '../utils';
 
 export abstract class TsField {
   constructor(
@@ -23,6 +23,8 @@ export abstract class TsField {
   public Contain(field: TsField): boolean {
     return field.Type === this.Type;
   }
+
+  public abstract Update(jsField: JsField): TsField;
 
   public readonly Name: string;
   public readonly Type: EType;
