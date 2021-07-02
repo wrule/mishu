@@ -1,5 +1,5 @@
 import { EType } from '../type';
-import { JsField } from './jsfield';
+import { JsField } from './jsField';
 
 export class JsNumber extends JsField {
   constructor(name: string) {
