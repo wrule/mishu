@@ -7,10 +7,10 @@ import { JsDate } from './jsDate';
 import { JsUnknow } from './jsUnknow';
 import { JsObject } from './jsObject';
 import { JsArray } from './jsArray';
-import { JsField } from './jsfield';
+import { JsField } from './jsField';
 
 export class JsFieldFactory {
-  public static Create(name: string, value: any) {
+  public static Create(name: string, value: any): JsField {
     const protName = Object.prototype.toString.call(value);
     switch (protName) {
       case '[object Undefined]':
