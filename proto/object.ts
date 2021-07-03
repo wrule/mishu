@@ -5,7 +5,7 @@ import { Field } from './field';
 export abstract class ObjectField extends Field {
   constructor(
     name: string,
-    private fieldsMap: Map<string, Field>,
+    protected fieldsMap: Map<string, Field>,
   ) {
     super(name, EType.Object);
   }
