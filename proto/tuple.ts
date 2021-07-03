@@ -5,7 +5,7 @@ import { Field } from './field';
 export abstract class TupleField extends Field {
   constructor(
     name: string,
-    private elements: Field[],
+    protected elements: Field[],
   ) {
     super(name, EType.Tuple);
   }

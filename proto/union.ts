@@ -5,7 +5,7 @@ import { Field } from './field';
 export abstract class UnionField extends Field {
   constructor(
     name: string,
-    private members: Field[],
+    protected members: Field[],
   ) {
     super(name, EType.Union);
   }
