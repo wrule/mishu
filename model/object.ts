@@ -5,13 +5,13 @@ import { Field } from './field';
 export abstract class ObjectField extends Field {
   constructor(
     name: string,
-    private fields: Field[],
+    private fieldsMap: Map<string, Field>,
   ) {
     super(name, EType.Object);
   }
 
   public Hash() {
-    const fields = this.fields.slice(0);
+    const fields = Array.from(this.fieldsMap.values());
     fields.sort((a, b) => a.Name.localeCompare(b.Name));
     return StringHash(
       fields
