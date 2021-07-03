@@ -22,3 +22,5 @@ const obj = {
 
 const jsField = JsFactory.Create('my', obj);
 console.log(jsField);
+const tsField = jsField.ToTs();
+console.log(tsField);
