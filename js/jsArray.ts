@@ -12,4 +12,8 @@ export class JsArray extends JsField {
   ) {
     super(name, EType.Array);
   }
+
+  public ToTs() {
+    
+  }
 }
