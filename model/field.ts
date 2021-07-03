@@ -2,6 +2,11 @@ import { EType } from "../type";
 import { StringHash } from "../utils";
 
 export abstract class Field {
+  constructor(
+    private name: string,
+    private type: EType,
+  ) { }
+
   public get Name() {
     return this.name;
   }
@@ -39,9 +44,4 @@ export abstract class Field {
   public Contain(field: Field): boolean {
     return this.Equal(field);
   }
-
-  constructor(
-    private name: string,
-    private type: EType,
-  ) { }
 }
