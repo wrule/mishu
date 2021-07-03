@@ -26,6 +26,8 @@ export abstract class TsField {
 
   public abstract Update(jsField: JsField): TsField;
 
+  public abstract Merge(tsField: TsField): TsField;
+
   public readonly Name: string;
   public readonly Type: EType;
 }
