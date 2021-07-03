@@ -1,4 +1,5 @@
 import { Field } from '../proto/field';
+import { TsBoolean } from '../ts/tsBoolean';
 import { EType } from '../type';
 import { JsField } from './jsField';
 
@@ -8,6 +9,6 @@ export class JsBoolean extends Field implements JsField {
   }
 
   public ToTs() {
-
+    return new TsBoolean(this.Name);
   }
 }

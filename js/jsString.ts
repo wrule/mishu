@@ -1,4 +1,5 @@
 import { Field } from '../proto/field';
+import { TsString } from '../ts/tsString';
 import { EType } from '../type';
 import { JsField } from './jsField';
 
@@ -8,6 +9,6 @@ export class JsString extends Field implements JsField {
   }
 
   public ToTs() {
-
+    return new TsString(this.Name);
   }
 }
