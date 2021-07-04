@@ -41,6 +41,23 @@ export class TsObject extends ObjectField implements TsField {
     }
   }
 
+  public Contain(tsField: TsField): boolean {
+    if (tsField.Type === EType.Object) {
+      const objectField = tsField as TsObject;
+      return (
+        objectField.Fields.length === this.Fields.length &&
+        objectField.Fields.every(
+          (field) => this.FieldsMap.has(field.Name)
+        ) &&
+        objectField.Fields.every(
+          (field) => (this.FieldsMap.get(field.Name) as TsField).Contain(field)
+        )
+      );
+    } else {
+      return false;
+    }
+  }
+
   public Merge(tsField: TsField) {
     return { } as any;
   }
