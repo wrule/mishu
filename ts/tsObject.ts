@@ -2,6 +2,8 @@
 import { ObjectField } from '../proto/object';
 import { EType } from '../type';
 import { TsField } from './tsField';
+import { TsUndefined } from './tsUndefined';
+import { TsUnion } from './tsUnion';
 
 export class TsObject extends ObjectField implements TsField {
   constructor(
@@ -58,7 +60,32 @@ export class TsObject extends ObjectField implements TsField {
     }
   }
 
-  public Merge(tsField: TsField) {
-    return { } as any;
+  public Merge(tsField: TsField): TsField {
+    if (tsField.Type === EType.Object) {
+      const objectField = tsField as TsObject;
+      const similarity = this.Compare(objectField);
+      if (similarity >= 0.2) {
+        const allFieldNames = Array.from(
+          new Set(
+            this.Fields
+              .map((field) => field.Name)
+              .concat(objectField.Fields.map((field) => field.Name))
+          )
+        );
+        const newFields = allFieldNames.map((name) => {
+          const field1 = this.FieldsMap.get(name) || new TsUndefined(name);
+          const field2 = objectField.FieldsMap.get(name) || new TsUndefined(name);
+          return field1.Merge(field2);
+        });
+        const newFieldsMap = new Map<string, TsField>(
+          newFields.map((field) => [field.Name, field])
+        );
+        return new TsObject(this.Name, newFieldsMap);
+      } else {
+        return new TsUnion(this.Name, [this, objectField]);
+      }
+    } else {
+      return tsField.Merge(this);
+    }
   }
 }
