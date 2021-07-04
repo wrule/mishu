@@ -37,6 +37,13 @@ export class TsUnion extends UnionField implements TsField {
   }
 
   public Merge(tsField: TsField) {
+    const newMembers: TsField[] = [];
+    if (tsField.Type === EType.Union) {
+      const unionField = tsField as TsUnion;
+      newMembers.push(...unionField.Members);
+    } else {
+      newMembers.push(tsField);
+    }
     return { } as any;
   }
 }
