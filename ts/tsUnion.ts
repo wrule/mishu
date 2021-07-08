@@ -15,14 +15,6 @@ export class TsUnion extends UnionField implements TsField {
     return this.members as TsField[];
   }
 
-  public Compare(tsField: TsField): number {
-    if (tsField.Type === EType.Union) {
-
-    } else {
-      return 0;
-    }
-  }
-
   public Contain(tsField: TsField): boolean {
     if (tsField.Type === EType.Union) {
       const unionField = tsField as TsUnion;
