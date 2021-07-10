@@ -38,6 +38,9 @@ export abstract class Field {
   }
 
   public Compare(field: Field): number {
+    if (field.Type === EType.Union) {
+      return field.Compare(this);
+    }
     return this.Equal(field) ? 1 : 0;
   }
 
