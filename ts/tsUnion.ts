@@ -49,14 +49,39 @@ export class TsUnion extends UnionField implements TsField {
     }
   }
 
-  public Merge(tsField: TsField) {
-    const newMembers: TsField[] = [];
+  public Merge(tsField: TsField): TsField {
+    let mergeDst = new TsUnion(
+      this.Name,
+      this.Members.slice(),
+    );
     if (tsField.Type === EType.Union) {
       const unionField = tsField as TsUnion;
-      newMembers.push(...unionField.Members);
+      unionField.Members.forEach((member) => {
+        mergeDst = mergeDst.Merge(member) as TsUnion;
+      });
     } else {
-      newMembers.push(tsField);
+      let maxIndex = -1, maxValue = -1;
+      mergeDst.Members.forEach((member, index) => {
+        const similarity = member.Compare(tsField);
+        if (similarity > maxValue) {
+          maxValue = similarity;
+          maxIndex = index;
+        }
+      });
+      if (maxValue >= 0.2) {
+        mergeDst.Members.splice(
+          maxIndex,
+          1,
+          mergeDst.Members[maxIndex].Merge(tsField),
+        );
+      } else {
+        mergeDst.Members.push(tsField);
+      }
     }
-    return { } as any;
+    return mergeDst.Optimization();
+  }
+
+  public Optimization() {
+    return new TsUnion(this.Name, this.Members);
   }
 }
