@@ -15,6 +15,27 @@ export class TsUnion extends UnionField implements TsField {
     return this.members as TsField[];
   }
 
+  public Compare(tsField: TsField): number {
+    const similarities: number[] = [];
+    if (tsField.Type === EType.Union) {
+      const unionField = tsField as TsUnion;
+      for (let i = 0; i < this.Members.length; ++i) {
+        for (let j = 0; j < unionField.Members.length; ++j) {
+          similarities.push(
+            this.Members[i].Compare(unionField.Members[j])
+          );
+        }
+      }
+    } else {
+      this.Members.forEach((member) => {
+        similarities.push(member.Compare(tsField))
+      });
+    }
+    return similarities.length > 0 ?
+      Math.max(...similarities) :
+      0;
+  }
+
   public Contain(tsField: TsField): boolean {
     if (tsField.Type === EType.Union) {
       const unionField = tsField as TsUnion;
