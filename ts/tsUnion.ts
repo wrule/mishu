@@ -81,17 +81,35 @@ export class TsUnion extends UnionField implements TsField {
     return mergeDst.Optimization();
   }
 
-  public Optimization() {
+  private getMostSimilarPair(tsFields: TsField[]) {
     let optList: [number, number, number][] = [];
-    for (let i = 0; i < this.Members.length - 1; ++i) {
-      for (let j = 1; j < this.Members.length; ++j) {
+    for (let i = 0; i < tsFields.length - 1; ++i) {
+      for (let j = 1; j < tsFields.length; ++j) {
         optList.push([
-          i, j, this.Members[i].Compare(this.Members[j])
+          tsFields[i].Compare(tsFields[j]), i, j,
         ]);
       }
     }
-    optList.sort((a, b) => a[2] - b[2]);
-    optList = optList.filter((item) => item[2] >= 0.2);
-    return new TsUnion(this.Name, this.Members);
+    if (optList.length > 0) {
+      optList.sort((a, b) => a[0] - b[0]);
+      return optList[0];
+    }
+    return null;
+  }
+
+  public Optimization() {
+    const newMembers = this.Members.slice();
+    // 优化到极致
+    while (true) {
+      const pair = this.getMostSimilarPair(newMembers);
+      if (!pair || pair[0] < 0.2) {
+        break;
+      }
+      const index1 = pair[1], index2 = pair[2];
+      const field1 = newMembers[index1], field2 = newMembers[index2];
+      newMembers[index1] = field1.Merge(field2);
+      newMembers.splice(index2, 1);
+    }
+    return new TsUnion(this.Name, newMembers);
   }
 }
