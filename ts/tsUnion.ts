@@ -82,6 +82,16 @@ export class TsUnion extends UnionField implements TsField {
   }
 
   public Optimization() {
+    let optList: [number, number, number][] = [];
+    for (let i = 0; i < this.Members.length - 1; ++i) {
+      for (let j = 1; j < this.Members.length; ++j) {
+        optList.push([
+          i, j, this.Members[i].Compare(this.Members[j])
+        ]);
+      }
+    }
+    optList.sort((a, b) => a[2] - b[2]);
+    optList = optList.filter((item) => item[2] >= 0.2);
     return new TsUnion(this.Name, this.Members);
   }
 }
