@@ -17,6 +17,10 @@ export class JsArray extends ArrayField implements JsField {
     return this.elements;
   }
 
+  public get Element() {
+    return this.element as JsField;
+  }
+
   public ToTs() {
     // TODO
     return new TsArray(this.Name, this.Elements[0].ToTs());
