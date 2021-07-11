@@ -10,8 +10,16 @@ export abstract class ObjectField extends Field {
     super(name, EType.Object);
   }
 
+  public get FieldsMap() {
+    return this.fieldsMap;
+  }
+
+  public get Fields() {
+    return Array.from(this.fieldsMap.values());
+  }
+
   public Hash() {
-    const fields = Array.from(this.fieldsMap.values());
+    const fields = this.Fields.slice();
     fields.sort((a, b) => a.Name.localeCompare(b.Name));
     return StringHash(
       fields
