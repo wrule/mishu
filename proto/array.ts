@@ -10,9 +10,7 @@ export abstract class ArrayField extends Field {
     super(name, EType.Array);
   }
 
-  public get Element() {
-    return this.element;
-  }
+  abstract Element: Field;
 
   public Hash() {
     return StringHash(`${this.Element.Hash()}[]`);

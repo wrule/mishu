@@ -10,13 +10,9 @@ export abstract class ObjectField extends Field {
     super(name, EType.Object);
   }
 
-  public get FieldsMap() {
-    return this.fieldsMap;
-  }
+  abstract FieldsMap: Map<string, Field>;
 
-  public get Fields() {
-    return Array.from(this.fieldsMap.values());
-  }
+  abstract Fields: Field[];
 
   public Hash() {
     const fields = this.Fields.slice();

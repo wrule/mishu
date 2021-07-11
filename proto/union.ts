@@ -10,9 +10,7 @@ export abstract class UnionField extends Field {
     super(name, EType.Union);
   }
 
-  public get Members() {
-    return this.members;
-  }
+  abstract Members: Field[];
 
   public Hash() {
     const members = this.Members.slice();

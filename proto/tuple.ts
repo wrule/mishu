@@ -10,9 +10,7 @@ export abstract class TupleField extends Field {
     super(name, EType.Tuple);
   }
 
-  public get Elements() {
-    return this.elements;
-  }
+  abstract Elements: Field[];
 
   public Hash() {
     return StringHash(
