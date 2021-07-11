@@ -10,8 +10,12 @@ export abstract class UnionField extends Field {
     super(name, EType.Union);
   }
 
+  public get Members() {
+    return this.members;
+  }
+
   public Hash() {
-    const members = this.members.slice(0);
+    const members = this.Members.slice();
     members.sort((a, b) => a.Hash().localeCompare(b.Hash()));
     return StringHash(
       members
