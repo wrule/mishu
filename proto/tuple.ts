@@ -10,9 +10,13 @@ export abstract class TupleField extends Field {
     super(name, EType.Tuple);
   }
 
+  public get Elements() {
+    return this.elements;
+  }
+
   public Hash() {
     return StringHash(
-      this.elements
+      this.Elements
         .map((element) => element.Hash())
         .join(',')
     );
