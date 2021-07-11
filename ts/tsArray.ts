@@ -60,6 +60,13 @@ export class TsArray extends ArrayField implements TsField {
       } else {
         return new TsUnion(this.Name, [this, arrayField]);
       }
+    } else if (tsField.Type === EType.Tuple) {
+      const tupleField = tsField as TsTuple;
+      if (this.Compare(tupleField) >= 0.2) {
+        
+      } else {
+        return new TsUnion(this.Name, [this, tupleField]);
+      }
     } else if (tsField.Type === EType.Union) {
       return tsField.Merge(this);
     } else {
