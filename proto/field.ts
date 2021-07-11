@@ -1,5 +1,5 @@
-import { EType } from "../type";
-import { StringHash } from "../utils";
+import { EType } from '../type';
+import { StringHash } from '../utils';
 
 export abstract class Field {
   constructor(
@@ -26,11 +26,10 @@ export abstract class Field {
   ]);
 
   public Hash() {
-    const result = Field.hashs.get(this.Type);
-    if (!result) {
-      throw new Error('非基本类型的Hash函数未实现');
+    if (Field.hashs.has(this.Type)) {
+      return Field.hashs.get(this.Type) as string;
     }
-    return result;
+    throw new Error('非基本类型的Hash方法未实现');
   }
 
   public Equal(field: Field): boolean {
@@ -38,9 +37,6 @@ export abstract class Field {
   }
 
   public Compare(field: Field): number {
-    if (field.Type === EType.Union) {
-      return field.Compare(this);
-    }
     return this.Equal(field) ? 1 : 0;
   }
 
