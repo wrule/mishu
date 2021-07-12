@@ -38,10 +38,10 @@ export class TsMerger {
   }
 
   public static Merge(tsFields: TsField[]) {
-    const unionMap = new Map<number, TsField>(
+    const tupleMap = new Map<number, TsField>(
       tsFields.map((tsField, index) => [index, tsField])
     );
-    const tupleMap = new Map<number, TsField>(
+    const unionMap = new Map<number, TsField>(
       tsFields.map((tsField, index) => [index, tsField])
     );
 
@@ -65,9 +65,33 @@ export class TsMerger {
       const bestSimilarPair = similarPairs[0];
       const srcField = unionMap.get(bestSimilarPair.srcIndex) as TsField;
       const dstField = unionMap.get(bestSimilarPair.dstIndex) as TsField;
-      const mergedField = srcField?.Merge(dstField);
-      tupleMap.set(bestSimilarPair.srcIndex, mergedField);
-      tupleMap.set(bestSimilarPair.dstIndex, mergedField);
+      const mergedField = srcField.Merge(dstField);
+      unionMap.set(bestSimilarPair.srcIndex, mergedField);
+      unionMap.delete(bestSimilarPair.dstIndex);
+      similarPairs = similarPairs.filter(
+        (pair) => !(
+          (pair.srcIndex === bestSimilarPair.srcIndex && pair.dstIndex === bestSimilarPair.dstIndex) ||
+          (pair.srcIndex === bestSimilarPair.dstIndex && pair.dstIndex === bestSimilarPair.srcIndex)
+        )
+      );
+      similarPairs.forEach((pair) => {
+        if (pair.srcIndex === bestSimilarPair.srcIndex) {
+          const srcField = unionMap.get(pair.srcIndex) as TsField;
+          const dstField = unionMap.get(pair.dstIndex) as TsField;
+          pair.similarity = srcField.Compare(dstField);
+        }
+        if (pair.dstIndex === bestSimilarPair.srcIndex) {
+          const srcField = unionMap.get(pair.srcIndex) as TsField;
+          const dstField = unionMap.get(pair.dstIndex) as TsField;
+          pair.similarity = srcField.Compare(dstField);
+        }
+        if (pair.srcIndex === bestSimilarPair.dstIndex) {
+
+        }
+        if (pair.dstIndex === bestSimilarPair.dstIndex) {
+          
+        }
+      });
     }
 
   }
