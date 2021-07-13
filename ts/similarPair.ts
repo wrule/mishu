@@ -1,10 +1,15 @@
+import { TsField } from "./tsField";
 
 export class SimilarPair {
   constructor(
     private srcIndex: number,
     private dstIndex: number,
-    private similarity: number,
-  ) { }
+    tsFieldsMap: Map<number, TsField>,
+  ) {
+    this.ReCompare(tsFieldsMap);
+  }
+
+  private similarity = 0;
 
   /**
    * 源索引
@@ -27,41 +32,22 @@ export class SimilarPair {
     return this.similarity;
   }
 
-  /**
-   * 判断是否是同一对
-   * @param pair 另一对
-   * @returns 布尔值
-   */
-  public IsSamePair(pair: SimilarPair) {
+  public IsRelevant(index: number) {
     return (
-      (this.srcIndex === pair.SrcIndex && this.dstIndex === pair.DstIndex) ||
-      (this.srcIndex === pair.DstIndex && this.dstIndex === pair.SrcIndex)
+      this.srcIndex === index ||
+      this.dstIndex === index
     );
   }
 
-  /**
-   * 判断是否和本对关联
-   * @param pair 另一对
-   * @returns 布尔值
-   */
-  public IsRelevant(pair: SimilarPair) {
-    return (
-      this.srcIndex === pair.SrcIndex ||
-      this.srcIndex === pair.DstIndex ||
-      this.dstIndex === pair.SrcIndex ||
-      this.dstIndex === pair.DstIndex
-    );
-  }
-
-  /**
-   * 判断对是否相等
-   * @param pair 另一对
-   * @returns 布尔值
-   */
-  public Equal(pair: SimilarPair) {
-    return (
-      this.IsSamePair(pair) &&
-      this.similarity === pair.Similarity
-    );
+  public ReCompare(tsFieldsMap: Map<number, TsField>) {
+    const srcTsField = tsFieldsMap.get(this.SrcIndex);
+    if (!srcTsField) {
+      throw new Error('索引不到源字段');
+    }
+    const dstTsField = tsFieldsMap.get(this.DstIndex);
+    if (!dstTsField) {
+      throw new Error('索引不到目标字段');
+    }
+    this.similarity = srcTsField.Compare(dstTsField);
   }
 }
