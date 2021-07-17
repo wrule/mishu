@@ -1,6 +1,7 @@
 
 import { TupleField } from '../proto/tuple';
 import { EType } from '../type';
+import { BeforeCompare } from './decorators';
 import { TsField } from './tsField';
 import { TsUndefined } from './tsUndefined';
 import { TsUnion } from './tsUnion';
@@ -17,6 +18,7 @@ export class TsTuple extends TupleField implements TsField {
     return this.elements as TsField[];
   }
 
+  @BeforeCompare()
   public Compare(tsField: TsField): number {
     if (tsField.Type === EType.Tuple) {
       const tupleField = tsField as TsTuple;

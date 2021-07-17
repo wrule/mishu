@@ -1,5 +1,6 @@
 import { Field } from '../proto/field';
 import { EType } from '../type';
+import { BeforeCompare } from './decorators';
 import { TsField } from './tsField';
 
 export class TsUnknow extends Field implements TsField {
@@ -11,6 +12,7 @@ export class TsUnknow extends Field implements TsField {
     return false;
   }
 
+  @BeforeCompare()
   public Compare(tsField: TsField) {
     return 0;
   }

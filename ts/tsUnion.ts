@@ -1,6 +1,7 @@
 
 import { UnionField } from '../proto/union';
 import { EType } from '../type';
+import { BeforeCompare } from './decorators';
 import { TsField } from './tsField';
 
 export class TsUnion extends UnionField implements TsField {
@@ -15,6 +16,7 @@ export class TsUnion extends UnionField implements TsField {
     return this.members as TsField[];
   }
 
+  @BeforeCompare()
   public Compare(tsField: TsField): number {
     const similarities: number[] = [];
     if (tsField.Type === EType.Union) {

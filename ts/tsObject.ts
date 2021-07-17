@@ -1,6 +1,7 @@
 
 import { ObjectField } from '../proto/object';
 import { EType } from '../type';
+import { BeforeCompare } from './decorators';
 import { TsField } from './tsField';
 import { TsUndefined } from './tsUndefined';
 import { TsUnion } from './tsUnion';
@@ -21,6 +22,7 @@ export class TsObject extends ObjectField implements TsField {
     return Array.from(this.FieldsMap.values());
   }
 
+  @BeforeCompare()
   public Compare(tsField: TsField): number {
     if (tsField.Type === EType.Object) {
       const objectField = tsField as TsObject;

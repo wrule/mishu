@@ -1,6 +1,7 @@
 
 import { ArrayField } from '../proto/array';
 import { EType } from '../type';
+import { BeforeCompare } from './decorators';
 import { TsField } from './tsField';
 import { TsTuple } from './tsTuple';
 import { TsUnion } from './tsUnion';
@@ -17,6 +18,7 @@ export class TsArray extends ArrayField implements TsField {
     return this.element as TsField;
   }
 
+  @BeforeCompare()
   public Compare(tsField: TsField): number {
     if (tsField.Type === EType.Array) {
       const arrayField = tsField as TsArray;
