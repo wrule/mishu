@@ -8,7 +8,7 @@ export class TsUnknow extends Field implements TsField {
   }
 
   public iCompare(tsField: TsField) {
-    return { } as any;
+    return 0;
   }
 
   public Merge(tsField: TsField): TsField {
