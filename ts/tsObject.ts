@@ -13,10 +13,6 @@ export class TsObject extends ObjectField implements TsField {
     super(name, fieldsMap);
   }
 
-  public iCompare(tsField: TsField) {
-    return { } as any;
-  }
-
   public get FieldsMap() {
     return this.fieldsMap as Map<string, TsField>;
   }
@@ -25,7 +21,7 @@ export class TsObject extends ObjectField implements TsField {
     return Array.from(this.FieldsMap.values());
   }
 
-  public Compare(tsField: TsField): number {
+  public iCompare(tsField: TsField): number {
     if (tsField.Type === EType.Object) {
       const objectField = tsField as TsObject;
       const maxLength = this.Fields.length > objectField.Fields.length ?
