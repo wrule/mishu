@@ -11,6 +11,11 @@ export abstract class Field {
     return this.name;
   }
 
+  public UpdateName(name: string) {
+    this.name = name;
+    return this;
+  }
+
   public get Type() {
     return this.type;
   }
