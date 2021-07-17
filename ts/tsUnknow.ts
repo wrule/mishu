@@ -12,7 +12,7 @@ export class TsUnknow extends Field implements TsField {
     return false;
   }
 
-  @BeforeCompare()
+  // 这里不需要@BeforeCompare()，Unknow总是返回0
   public Compare(tsField: TsField) {
     return 0;
   }
