@@ -13,15 +13,11 @@ export class TsArray extends ArrayField implements TsField {
     super(name, element);
   }
 
-  public iCompare(tsField: TsField) {
-    return { } as any;
-  }
-
   public get Element() {
     return this.element as TsField;
   }
 
-  public Compare(tsField: TsField): number {
+  public iCompare(tsField: TsField): number {
     if (tsField.Type === EType.Array) {
       const arrayField = tsField as TsArray;
       return (this.Element.Compare(arrayField.Element) * 0.9) + 0.1;
