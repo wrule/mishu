@@ -3,9 +3,11 @@
  */
 import { TsField } from './tsField';
 import { SimilarPair } from './similarPair';
+import { TsUnion } from './tsUnion';
+import { TsUnknow } from './tsUnknow';
 
 export class TsMerger {
-  public static Merge(tsFields: TsField[]) {
+  private static merge(tsFields: TsField[]) {
     const unionMap = new Map<number, TsField>(
       tsFields.map((tsField, index) => [index, tsField])
     );
@@ -49,5 +51,9 @@ export class TsMerger {
         break;
       }
     }
+    return {
+      tupleIndexs,
+      unionMap,
+    };
   }
 }
