@@ -13,15 +13,11 @@ export class TsTuple extends TupleField implements TsField {
     super(name, elements);
   }
 
-  public iCompare(tsField: TsField) {
-    return { } as any;
-  }
-
   public get Elements() {
     return this.elements as TsField[];
   }
 
-  public Compare(tsField: TsField): number {
+  public iCompare(tsField: TsField): number {
     if (tsField.Type === EType.Tuple) {
       const tupleField = tsField as TsTuple;
       const maxLength = this.Elements.length > tupleField.Elements.length ?
@@ -32,10 +28,12 @@ export class TsTuple extends TupleField implements TsField {
         const field1 = this.Elements[i];
         const field2 = tupleField.Elements[i];
         if (field1 && field2) {
-          sum += field2.Compare(field2);
+          sum += field1.Compare(field2);
         }
       }
       return sum / (maxLength || 1);
+    } else if (tsField.Type === EType.Array) {
+      return tsField.Compare(this);
     } else {
       return 0;
     }
