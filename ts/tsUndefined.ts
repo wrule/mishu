@@ -8,6 +8,10 @@ export class TsUndefined extends Field implements TsField {
     super(name, EType.Undefined);
   }
 
+  public iCompare(tsField: TsField) {
+    return { } as any;
+  }
+
   public Merge(tsField: TsField): TsField {
     if (tsField.Type === EType.Undefined) {
       return new TsUndefined(this.Name);

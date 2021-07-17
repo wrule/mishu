@@ -8,6 +8,10 @@ export class TsString extends Field implements TsField {
     super(name, EType.String);
   }
 
+  public iCompare(tsField: TsField) {
+    return { } as any;
+  }
+
   public Merge(tsField: TsField): TsField {
     if (tsField.Type === EType.String) {
       return new TsString(this.Name);

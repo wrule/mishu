@@ -13,6 +13,10 @@ export class TsArray extends ArrayField implements TsField {
     super(name, element);
   }
 
+  public iCompare(tsField: TsField) {
+    return { } as any;
+  }
+
   public get Element() {
     return this.element as TsField;
   }

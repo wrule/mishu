@@ -8,6 +8,10 @@ export class TsNull extends Field implements TsField {
     super(name, EType.Null);
   }
 
+  public iCompare(tsField: TsField) {
+    return { } as any;
+  }
+
   public Merge(tsField: TsField): TsField {
     if (tsField.Type === EType.Null) {
       return new TsNull(this.Name);

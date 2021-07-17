@@ -13,6 +13,10 @@ export class TsObject extends ObjectField implements TsField {
     super(name, fieldsMap);
   }
 
+  public iCompare(tsField: TsField) {
+    return { } as any;
+  }
+
   public get FieldsMap() {
     return this.fieldsMap as Map<string, TsField>;
   }

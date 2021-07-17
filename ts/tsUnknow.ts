@@ -7,6 +7,10 @@ export class TsUnknow extends Field implements TsField {
     super(name, EType.Unknow);
   }
 
+  public iCompare(tsField: TsField) {
+    return { } as any;
+  }
+
   public Merge(tsField: TsField): TsField {
     if (tsField.Type === EType.Unknow) {
       return new TsUnknow(this.Name);

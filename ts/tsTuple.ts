@@ -13,6 +13,10 @@ export class TsTuple extends TupleField implements TsField {
     super(name, elements);
   }
 
+  public iCompare(tsField: TsField) {
+    return { } as any;
+  }
+
   public get Elements() {
     return this.elements as TsField[];
   }

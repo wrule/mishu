@@ -11,6 +11,10 @@ export class TsUnion extends UnionField implements TsField {
     super(name, members);
   }
 
+  public iCompare(tsField: TsField) {
+    return { } as any;
+  }
+
   public get Members() {
     return this.members as TsField[];
   }

@@ -8,6 +8,10 @@ export class TsDate extends Field implements TsField {
     super(name, EType.Date);
   }
 
+  public iCompare(tsField: TsField) {
+    return { } as any;
+  }
+
   public Merge(tsField: TsField): TsField {
     if (tsField.Type === EType.Date) {
       return new TsDate(this.Name);
