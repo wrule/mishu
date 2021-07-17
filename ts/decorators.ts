@@ -37,6 +37,21 @@ export function BeforeMerge() {
     descriptor.value = function(...args: any[]) {
       const that = this as TsField;
       const tsField = args[0] as TsField;
+      if (tsField.Hash() === that.Hash()) {
+        return that;
+      }
+      if (that.Contain(tsField)) {
+        return that;
+      }
+      if (tsField.Type === EType.Unknow) {
+        return that;
+      }
+      if (
+        tsField.Type === EType.Array &&
+        that.Type === EType.Tuple
+      ) {
+        return tsField.Merge(that);
+      }
       if (
         tsField.Type === EType.Union &&
         that.Type !== EType.Union

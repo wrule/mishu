@@ -20,10 +20,6 @@ export class TsString extends Field implements TsField {
 
   @BeforeMerge()
   public Merge(tsField: TsField): TsField {
-    if (tsField.Type === EType.String) {
-      return new TsString(this.Name);
-    } else {
-      return new TsUnion(this.Name, [this, tsField]);
-    }
+    return new TsUnion(this.Name, [this, tsField]);
   }
 }

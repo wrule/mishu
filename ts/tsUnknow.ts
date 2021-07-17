@@ -17,13 +17,8 @@ export class TsUnknow extends Field implements TsField {
     return 0;
   }
 
-  // @BeforeMerge()，不需要
+  @BeforeMerge()
   public Merge(tsField: TsField): TsField {
-    if (tsField.Type === EType.Unknow) {
-      return new TsUnknow(this.Name);
-    } else {
-      // TODO 这边应该拷贝
-      return tsField;
-    }
+    return tsField;
   }
 }

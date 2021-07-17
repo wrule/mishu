@@ -1,7 +1,7 @@
 
 import { ObjectField } from '../proto/object';
 import { EType } from '../type';
-import { BeforeCompare } from './decorators';
+import { BeforeCompare, BeforeMerge } from './decorators';
 import { TsField } from './tsField';
 import { TsUndefined } from './tsUndefined';
 import { TsUnion } from './tsUnion';
@@ -62,6 +62,7 @@ export class TsObject extends ObjectField implements TsField {
     }
   }
 
+  @BeforeMerge()
   public Merge(tsField: TsField): TsField {
     if (tsField.Type === EType.Object) {
       const objectField = tsField as TsObject;
@@ -87,7 +88,7 @@ export class TsObject extends ObjectField implements TsField {
         return new TsUnion(this.Name, [this, objectField]);
       }
     } else {
-      return tsField.Merge(this);
+      return new TsUnion(this.Name, [this, tsField]);
     }
   }
 }

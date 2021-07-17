@@ -20,10 +20,6 @@ export class TsDate extends Field implements TsField {
 
   @BeforeMerge()
   public Merge(tsField: TsField): TsField {
-    if (tsField.Type === EType.Date) {
-      return new TsDate(this.Name);
-    } else {
-      return new TsUnion(this.Name, [this, tsField]);
-    }
+    return new TsUnion(this.Name, [this, tsField]);
   }
 }

@@ -20,10 +20,6 @@ export class TsUndefined extends Field implements TsField {
 
   @BeforeMerge()
   public Merge(tsField: TsField): TsField {
-    if (tsField.Type === EType.Undefined) {
-      return new TsUndefined(this.Name);
-    } else {
-      return new TsUnion(this.Name, [this, tsField]);
-    }
+    return new TsUnion(this.Name, [this, tsField]);
   }
 }

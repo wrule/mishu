@@ -20,10 +20,6 @@ export class TsBoolean extends Field implements TsField {
 
   @BeforeMerge()
   public Merge(tsField: TsField): TsField {
-    if (tsField.Type === EType.Boolean) {
-      return new TsBoolean(this.Name);
-    } else {
-      return new TsUnion(this.Name, [this, tsField]);
-    }
+    return new TsUnion(this.Name, [this, tsField]);
   }
 }

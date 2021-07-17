@@ -20,10 +20,6 @@ export class TsNull extends Field implements TsField {
 
   @BeforeMerge()
   public Merge(tsField: TsField): TsField {
-    if (tsField.Type === EType.Null) {
-      return new TsNull(this.Name);
-    } else {
-      return new TsUnion(this.Name, [this, tsField]);
-    }
+    return new TsUnion(this.Name, [this, tsField]);
   }
 }
