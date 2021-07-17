@@ -8,7 +8,11 @@ export class TsString extends Field implements TsField {
     super(name, EType.String);
   }
 
-  public iCompare(tsField: TsField) {
+  public Contain(tsField: TsField) {
+    return false;
+  }
+
+  public Compare(tsField: TsField) {
     return 0;
   }
 

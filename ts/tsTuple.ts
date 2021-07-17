@@ -17,7 +17,7 @@ export class TsTuple extends TupleField implements TsField {
     return this.elements as TsField[];
   }
 
-  public iCompare(tsField: TsField): number {
+  public Compare(tsField: TsField): number {
     if (tsField.Type === EType.Tuple) {
       const tupleField = tsField as TsTuple;
       const maxLength = this.Elements.length > tupleField.Elements.length ?

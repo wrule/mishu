@@ -21,7 +21,7 @@ export class TsObject extends ObjectField implements TsField {
     return Array.from(this.FieldsMap.values());
   }
 
-  public iCompare(tsField: TsField): number {
+  public Compare(tsField: TsField): number {
     if (tsField.Type === EType.Object) {
       const objectField = tsField as TsObject;
       const maxLength = this.Fields.length > objectField.Fields.length ?

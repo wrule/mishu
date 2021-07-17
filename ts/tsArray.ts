@@ -17,7 +17,7 @@ export class TsArray extends ArrayField implements TsField {
     return this.element as TsField;
   }
 
-  public iCompare(tsField: TsField): number {
+  public Compare(tsField: TsField): number {
     if (tsField.Type === EType.Array) {
       const arrayField = tsField as TsArray;
       return (this.Element.Compare(arrayField.Element) * 0.9) + 0.1;
@@ -63,7 +63,8 @@ export class TsArray extends ArrayField implements TsField {
     } else if (tsField.Type === EType.Tuple) {
       const tupleField = tsField as TsTuple;
       if (this.Compare(tupleField) >= 0.2) {
-        
+        // TODO
+        return { } as any;
       } else {
         return new TsUnion(this.Name, [this, tupleField]);
       }

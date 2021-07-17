@@ -8,7 +8,11 @@ export class TsUndefined extends Field implements TsField {
     super(name, EType.Undefined);
   }
 
-  public iCompare(tsField: TsField) {
+  public Contain(tsField: TsField) {
+    return false;
+  }
+
+  public Compare(tsField: TsField) {
     return 0;
   }
 

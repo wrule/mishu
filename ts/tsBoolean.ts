@@ -8,7 +8,11 @@ export class TsBoolean extends Field implements TsField {
     super(name, EType.Boolean);
   }
 
-  public iCompare(tsField: TsField) {
+  public Contain(tsField: TsField) {
+    return false;
+  }
+
+  public Compare(tsField: TsField) {
     return 0;
   }
 
