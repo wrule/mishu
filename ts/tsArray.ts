@@ -3,6 +3,7 @@ import { ArrayField } from '../proto/array';
 import { EType } from '../type';
 import { BeforeCompare, BeforeMerge } from './decorators';
 import { TsField } from './tsField';
+import { TsMerger } from './tsMerger';
 import { TsTuple } from './tsTuple';
 import { TsUnion } from './tsUnion';
 
@@ -66,8 +67,11 @@ export class TsArray extends ArrayField implements TsField {
     } else if (tsField.Type === EType.Tuple) {
       const tupleField = tsField as TsTuple;
       if (this.Compare(tupleField) >= 0.2) {
-        // TODO
-        return { } as any;
+        const element = TsMerger.Optimize(
+          'element',
+          [this.Element, ...tupleField.Elements],
+        );
+        return new TsArray(this.Name, element);
       } else {
         return new TsUnion(this.Name, [this, tupleField]);
       }
