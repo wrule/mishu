@@ -32,6 +32,13 @@ export class SimilarPair {
     return this.similarity;
   }
 
+  /**
+   * 可以合并
+   */
+  public get CanBeMerged() {
+    return this.Similarity >= 0.2;
+  }
+
   public IsRelevant(index: number) {
     return (
       this.srcIndex === index ||
