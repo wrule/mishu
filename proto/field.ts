@@ -40,12 +40,4 @@ export abstract class Field {
   public Equal(field: Field): boolean {
     return field.Hash() === this.Hash();
   }
-
-  public Compare(field: Field): number {
-    return this.Equal(field) ? 1 : 0;
-  }
-
-  public Contain(field: Field): boolean {
-    return this.Equal(field);
-  }
 }
