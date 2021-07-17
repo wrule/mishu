@@ -1,4 +1,4 @@
-import { TsField } from "./tsField";
+import { TsField } from './tsField';
 
 export class SimilarPair {
   constructor(
