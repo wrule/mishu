@@ -1,6 +1,6 @@
 import { Field } from '../proto/field';
 import { EType } from '../type';
-import { BeforeCompare } from './decorators';
+import { BeforeCompare, BeforeMerge } from './decorators';
 import { TsField } from './tsField';
 
 export class TsUnknow extends Field implements TsField {
@@ -17,10 +17,12 @@ export class TsUnknow extends Field implements TsField {
     return 0;
   }
 
+  // @BeforeMerge()，不需要
   public Merge(tsField: TsField): TsField {
     if (tsField.Type === EType.Unknow) {
       return new TsUnknow(this.Name);
     } else {
+      // TODO 这边应该拷贝
       return tsField;
     }
   }

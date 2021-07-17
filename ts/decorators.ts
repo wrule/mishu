@@ -26,3 +26,26 @@ export function BeforeCompare() {
     return descriptor;
   };
 }
+
+export function BeforeMerge() {
+  return function (
+    target: any,
+    key: string | symbol,
+    descriptor: PropertyDescriptor,
+  ) {
+    const original = descriptor.value;
+    descriptor.value = function(...args: any[]) {
+      const that = this as TsField;
+      const tsField = args[0] as TsField;
+      if (
+        tsField.Type === EType.Union &&
+        that.Type !== EType.Union
+      ) {
+        return tsField.Merge(that);
+      }
+      const result = original.apply(this, args);
+      return result;
+    };
+    return descriptor;
+  };
+}
