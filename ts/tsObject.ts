@@ -44,20 +44,21 @@ export class TsObject extends ObjectField implements TsField {
   public Compare(tsField: TsField): number {
     if (tsField.Type === EType.Object) {
       const objectField = tsField as TsObject;
-      const maxLength = this.Fields.length > objectField.Fields.length ?
-        this.Fields.length :
-        objectField.Fields.length;
+      const maxLength = Array.from(new Set(
+        this.Fields
+          .map((field) => field.Name)
+          .concat(objectField.Fields.map((field) => field.Name))
+      )).length;
       const cmpFields = this.Fields.filter(
         (field) => objectField.FieldsMap.has(field.Name)
       );
-      const passRate = cmpFields.length / (maxLength || 1);
       let sum = 0;
       cmpFields.forEach((field) => {
         sum += field.Compare(
           objectField.FieldsMap.get(field.Name) as TsField
         ) * 0.6 + 0.4;
       });
-      return (sum / (cmpFields.length || 1)) * passRate;
+      return sum / (maxLength || 1);
     } else {
       return 0;
     }
