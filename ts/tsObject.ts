@@ -93,4 +93,12 @@ export class TsObject extends ObjectField implements TsField {
       return new TsUnion(this.Name, [this, tsField]);
     }
   }
+
+  public ToJsonObject() {
+    return {
+      type: this.Type,
+      name: this.Name,
+      fields: this.Fields.map((field) => field.ToJsonObject()),
+    };
+  }
 }

@@ -80,4 +80,12 @@ export class TsArray extends ArrayField implements TsField {
       return new TsUnion(this.Name, [this, tsField]);
     }
   }
+
+  public ToJsonObject() {
+    return {
+      type: this.Type,
+      name: this.Name,
+      element: this.Element.ToJsonObject(),
+    };
+  }
 }

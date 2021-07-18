@@ -79,4 +79,12 @@ export class TsTuple extends TupleField implements TsField {
       return new TsUnion(this.Name, [this, tsField]);
     }
   }
+
+  public ToJsonObject() {
+    return {
+      type: this.Type,
+      name: this.Name,
+      elements: this.Elements.map((element) => element.ToJsonObject()),
+    };
+  }
 }
