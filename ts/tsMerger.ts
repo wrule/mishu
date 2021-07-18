@@ -22,7 +22,7 @@ export class TsMerger {
     // 初始化similarPairs
     let similarPairs: SimilarPair[] = [];
     for (let i = 0; i < tsFields.length - 1; ++i) {
-      for (let j = 1; j < tsFields.length; ++j) {
+      for (let j = i + 1; j < tsFields.length; ++j) {
         similarPairs.push(new SimilarPair(i, j, unionMap));
       }
     }
