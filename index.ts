@@ -1,7 +1,5 @@
 import { JsFactory } from "./js/jsFactory";
 
-console.log('你好，世界');
-
 const obj = {
   "name": "jimao",
   "sex": true,
@@ -22,5 +20,5 @@ const obj = {
 
 const jsField = JsFactory.Create('my', obj);
 console.log(jsField.Hash());
-// const tsField = jsField.ToTs();
-// console.log(tsField);
+const tsField = jsField.ToTs();
+console.log(tsField);
