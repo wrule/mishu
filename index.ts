@@ -1,26 +1,58 @@
-import { JsFactory } from "./js/jsFactory";
+import { JsFactory } from './js/jsFactory';
 
-// const obj = {
-//   "name": "jimao",
-//   "sex": true,
-//   "age": 99,
-//   "address": "浙江省杭州市",
-//   "tags": ["程序员", "跑步", "看书"],
-//   "tuple": [
-//     ["m1", 1],
-//     ["m2", 2],
-//     ["m3", 3]
-//   ],
-//   "meta": {
-//     "color": "red",
-//     "lang": ["js", "ts", "c/c++", "go", "c#"]
-//   },
-//   "unknow": []
-// };
+let test = null;
 
-const obj = [1, true, 1, true, 1, true, 1, true, 1];
+test = JsFactory
+  .Create('test', 1)
+  .ToTs()
+  .Merge(
+    JsFactory
+      .Create('test', '123')
+      .ToTs()
+  )
+  .Merge(
+    JsFactory
+      .Create('test', true)
+      .ToTs()
+  )
+  .Merge(
+    JsFactory
+      .Create('test', 1)
+      .ToTs()
+  )
+console.log(test);
 
-const jsField = JsFactory.Create('my', obj);
-console.log(jsField.Hash());
-const tsField = jsField.ToTs();
-console.log(tsField);
+test = JsFactory
+  .Create('test', 1)
+  .ToTs()
+  .Merge(
+    JsFactory
+      .Create('test', '123')
+      .ToTs()
+  )
+  .Merge(
+    JsFactory
+      .Create('test', true)
+      .ToTs()
+  )
+console.log(test);
+
+test = JsFactory
+  .Create('test', 1)
+  .ToTs()
+  .Merge(
+    JsFactory
+      .Create('test', '123')
+      .ToTs()
+  );
+console.log(test);
+
+test = JsFactory
+  .Create('test', 1)
+  .ToTs()
+  .Merge(
+    JsFactory
+      .Create('test', 2)
+      .ToTs()
+  );
+console.log(test);
