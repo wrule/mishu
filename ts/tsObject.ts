@@ -1,7 +1,7 @@
 
 import { ObjectField } from '../proto/object';
 import { EType } from '../type';
-import { BeforeCompare, BeforeMerge } from './decorators';
+import { BeforeCompare, BeforeContain, BeforeMerge } from './decorators';
 import { TsField } from './tsField';
 import { TsUndefined } from './tsUndefined';
 import { TsUnion } from './tsUnion';
@@ -45,6 +45,7 @@ export class TsObject extends ObjectField implements TsField {
     }
   }
 
+  @BeforeContain()
   public Contain(tsField: TsField): boolean {
     if (tsField.Type === EType.Object) {
       const objectField = tsField as TsObject;

@@ -1,7 +1,7 @@
 
 import { ArrayField } from '../proto/array';
 import { EType } from '../type';
-import { BeforeCompare, BeforeMerge } from './decorators';
+import { BeforeCompare, BeforeContain, BeforeMerge } from './decorators';
 import { TsField } from './tsField';
 import { TsMerger } from './tsMerger';
 import { TsTuple } from './tsTuple';
@@ -38,6 +38,7 @@ export class TsArray extends ArrayField implements TsField {
     }
   }
 
+  @BeforeContain()
   public Contain(tsField: TsField): boolean {
     if (tsField.Type === EType.Array) {
       const arrayField = tsField as TsArray;

@@ -1,7 +1,7 @@
 
 import { UnionField } from '../proto/union';
 import { EType } from '../type';
-import { BeforeCompare, BeforeMerge } from './decorators';
+import { BeforeCompare, BeforeContain, BeforeMerge } from './decorators';
 import { TsField } from './tsField';
 import { TsMerger } from './tsMerger';
 
@@ -39,6 +39,7 @@ export class TsUnion extends UnionField implements TsField {
       0;
   }
 
+  @BeforeContain()
   public Contain(tsField: TsField): boolean {
     if (tsField.Type === EType.Union) {
       const unionField = tsField as TsUnion;

@@ -1,7 +1,7 @@
 
 import { TupleField } from '../proto/tuple';
 import { EType } from '../type';
-import { BeforeCompare, BeforeMerge } from './decorators';
+import { BeforeCompare, BeforeContain, BeforeMerge } from './decorators';
 import { TsField } from './tsField';
 import { TsUndefined } from './tsUndefined';
 import { TsUnion } from './tsUnion';
@@ -41,6 +41,7 @@ export class TsTuple extends TupleField implements TsField {
     }
   }
 
+  @BeforeContain()
   public Contain(tsField: TsField): boolean {
     if (tsField.Type === EType.Tuple) {
       const tupleField = tsField as TsTuple;
