@@ -46,6 +46,12 @@ export function BeforeCompare() {
     descriptor.value = function(...args: any[]) {
       const that = this as TsField;
       const tsField = args[0] as TsField;
+      if (
+        tsField.Type === EType.Unknow ||
+        that.Type === EType.Unknow
+      ) {
+        return 0;
+      }
       if (tsField.Hash() === that.Hash()) {
         return 1;
       }
