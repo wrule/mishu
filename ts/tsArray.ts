@@ -38,7 +38,7 @@ export class TsArray extends ArrayField implements TsField {
   public Compare(tsField: TsField): number {
     if (tsField.Type === EType.Array) {
       const arrayField = tsField as TsArray;
-      return (this.Element.Compare(arrayField.Element) * 0.9) + 0.1;
+      return this.Element.Compare(arrayField.Element) * 0.9 + 0.1;
     } else if (tsField.Type === EType.Tuple) {
       const tupleField = tsField as TsTuple;
       const similarities = tupleField.Elements.map(
