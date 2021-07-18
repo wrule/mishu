@@ -1,4 +1,5 @@
 
+import { JsField } from '../js/jsField';
 import { ObjectField } from '../proto/object';
 import { EType } from '../type';
 import { BeforeCompare, BeforeContain, BeforeMerge } from './decorators';
@@ -93,6 +94,10 @@ export class TsObject extends ObjectField implements TsField {
     } else {
       return new TsUnion(this.Name, [this, tsField]);
     }
+  }
+
+  public Update(jsField: JsField): TsField {
+    return this as any;
   }
 
   public ToJsonObject() {

@@ -1,4 +1,5 @@
 
+import { JsField } from '../js/jsField';
 import { TupleField } from '../proto/tuple';
 import { EType } from '../type';
 import { BeforeCompare, BeforeContain, BeforeMerge } from './decorators';
@@ -79,6 +80,10 @@ export class TsTuple extends TupleField implements TsField {
     } else {
       return new TsUnion(this.Name, [this, tsField]);
     }
+  }
+
+  public Update(jsField: JsField): TsField {
+    return this as any;
   }
 
   public ToJsonObject() {

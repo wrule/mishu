@@ -1,4 +1,5 @@
 
+import { JsField } from '../js/jsField';
 import { UnionField } from '../proto/union';
 import { EType } from '../type';
 import { BeforeCompare, BeforeContain, BeforeMerge } from './decorators';
@@ -64,6 +65,10 @@ export class TsUnion extends UnionField implements TsField {
       newMembers.push(tsField);
     }
     return TsMerger.Optimize(this.Name, newMembers);
+  }
+
+  public Update(jsField: JsField): TsField {
+    return this as any;
   }
 
   public ToJsonObject() {
