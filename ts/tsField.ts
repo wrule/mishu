@@ -9,7 +9,7 @@ export interface TsField extends Field {
 
   Merge(tsField: TsField): TsField;
 
-  // Update(jsField: JsField): TsField;
+  Update(jsField: JsField): TsField;
 
   ToJsonObject(): any;
 

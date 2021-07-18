@@ -1,3 +1,4 @@
+import { JsField } from '../js/jsField';
 import { Field } from '../proto/field';
 import { EType } from '../type';
 import { BeforeCompare, BeforeContain, BeforeMerge } from './decorators';
@@ -22,6 +23,10 @@ export class TsUnknow extends Field implements TsField {
   @BeforeMerge()
   public Merge(tsField: TsField): TsField {
     return tsField;
+  }
+
+  public Update(jsField: JsField): TsField {
+    return this as any;
   }
 
   public ToJsonObject() {
