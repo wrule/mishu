@@ -18,6 +18,21 @@ export class TsTuple extends TupleField implements TsField {
     return this.elements as TsField[];
   }
 
+  @BeforeContain()
+  public Contain(tsField: TsField): boolean {
+    if (tsField.Type === EType.Tuple) {
+      const tupleField = tsField as TsTuple;
+      return (
+        this.Elements.length === tupleField.Elements.length &&
+        this.Elements.every(
+          (element, index) => element.Contain(tupleField.Elements[index])
+        )
+      );
+    } else {
+      return false;
+    }
+  }
+
   @BeforeCompare()
   public Compare(tsField: TsField): number {
     if (tsField.Type === EType.Tuple) {
@@ -38,21 +53,6 @@ export class TsTuple extends TupleField implements TsField {
       return tsField.Compare(this);
     } else {
       return 0;
-    }
-  }
-
-  @BeforeContain()
-  public Contain(tsField: TsField): boolean {
-    if (tsField.Type === EType.Tuple) {
-      const tupleField = tsField as TsTuple;
-      return (
-        this.Elements.length === tupleField.Elements.length &&
-        this.Elements.every(
-          (element, index) => element.Contain(tupleField.Elements[index])
-        )
-      );
-    } else {
-      return false;
     }
   }
 

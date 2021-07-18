@@ -22,6 +22,24 @@ export class TsObject extends ObjectField implements TsField {
     return Array.from(this.FieldsMap.values());
   }
 
+  @BeforeContain()
+  public Contain(tsField: TsField): boolean {
+    if (tsField.Type === EType.Object) {
+      const objectField = tsField as TsObject;
+      return (
+        objectField.Fields.length === this.Fields.length &&
+        objectField.Fields.every(
+          (field) => this.FieldsMap.has(field.Name)
+        ) &&
+        objectField.Fields.every(
+          (field) => (this.FieldsMap.get(field.Name) as TsField).Contain(field)
+        )
+      );
+    } else {
+      return false;
+    }
+  }
+
   @BeforeCompare()
   public Compare(tsField: TsField): number {
     if (tsField.Type === EType.Object) {
@@ -42,24 +60,6 @@ export class TsObject extends ObjectField implements TsField {
       return (sum / (cmpFields.length || 1)) * passRate;
     } else {
       return 0;
-    }
-  }
-
-  @BeforeContain()
-  public Contain(tsField: TsField): boolean {
-    if (tsField.Type === EType.Object) {
-      const objectField = tsField as TsObject;
-      return (
-        objectField.Fields.length === this.Fields.length &&
-        objectField.Fields.every(
-          (field) => this.FieldsMap.has(field.Name)
-        ) &&
-        objectField.Fields.every(
-          (field) => (this.FieldsMap.get(field.Name) as TsField).Contain(field)
-        )
-      );
-    } else {
-      return false;
     }
   }
 

@@ -17,6 +17,20 @@ export class TsUnion extends UnionField implements TsField {
     return this.members as TsField[];
   }
 
+  @BeforeContain()
+  public Contain(tsField: TsField): boolean {
+    if (tsField.Type === EType.Union) {
+      const unionField = tsField as TsUnion;
+      return unionField.Members.every(
+        (member) => this.Contain(member)
+      );
+    } else {
+      return this.Members.some(
+        (member) => member.Contain(tsField)
+      );
+    }
+  }
+
   @BeforeCompare()
   public Compare(tsField: TsField): number {
     const similarities: number[] = [];
@@ -37,20 +51,6 @@ export class TsUnion extends UnionField implements TsField {
     return similarities.length > 0 ?
       Math.max(...similarities) :
       0;
-  }
-
-  @BeforeContain()
-  public Contain(tsField: TsField): boolean {
-    if (tsField.Type === EType.Union) {
-      const unionField = tsField as TsUnion;
-      return unionField.Members.every(
-        (member) => this.Contain(member)
-      );
-    } else {
-      return this.Members.some(
-        (member) => member.Contain(tsField)
-      );
-    }
   }
 
   @BeforeMerge()

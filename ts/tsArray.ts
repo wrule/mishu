@@ -19,6 +19,21 @@ export class TsArray extends ArrayField implements TsField {
     return this.element as TsField;
   }
 
+  @BeforeContain()
+  public Contain(tsField: TsField): boolean {
+    if (tsField.Type === EType.Array) {
+      const arrayField = tsField as TsArray;
+      return this.Element.Contain(arrayField.Element);
+    } else if (tsField.Type === EType.Tuple) {
+      const tupleField = tsField as TsTuple;
+      return tupleField.Elements.every(
+        (element) => this.Element.Contain(element)
+      );
+    } else {
+      return false;
+    }
+  }
+
   @BeforeCompare()
   public Compare(tsField: TsField): number {
     if (tsField.Type === EType.Array) {
@@ -35,21 +50,6 @@ export class TsArray extends ArrayField implements TsField {
       return (similarity * 0.95) + 0.05;
     } else {
       return 0;
-    }
-  }
-
-  @BeforeContain()
-  public Contain(tsField: TsField): boolean {
-    if (tsField.Type === EType.Array) {
-      const arrayField = tsField as TsArray;
-      return this.Element.Contain(arrayField.Element);
-    } else if (tsField.Type === EType.Tuple) {
-      const tupleField = tsField as TsTuple;
-      return tupleField.Elements.every(
-        (element) => this.Element.Contain(element)
-      );
-    } else {
-      return false;
     }
   }
 
