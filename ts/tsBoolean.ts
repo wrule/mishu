@@ -1,3 +1,4 @@
+import { JsField } from '../js/jsField';
 import { Field } from '../proto/field';
 import { EType } from '../type';
 import { BeforeCompare, BeforeContain, BeforeMerge } from './decorators';
@@ -22,5 +23,16 @@ export class TsBoolean extends Field implements TsField {
   @BeforeMerge()
   public Merge(tsField: TsField): TsField {
     return new TsUnion(this.Name, [this, tsField]);
+  }
+
+  public Update(jsField: JsField): TsField {
+    return this as any;
+  }
+
+  public ToJsonObject() {
+    return {
+      type: this.Type,
+      name: this.Name,
+    };
   }
 }

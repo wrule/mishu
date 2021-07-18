@@ -23,4 +23,11 @@ export class TsDate extends Field implements TsField {
   public Merge(tsField: TsField): TsField {
     return new TsUnion(this.Name, [this, tsField]);
   }
+
+  public ToJsonObject() {
+    return {
+      type: this.Type,
+      name: this.Name,
+    };
+  }
 }

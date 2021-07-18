@@ -22,4 +22,11 @@ export class TsUnknow extends Field implements TsField {
   public Merge(tsField: TsField): TsField {
     return tsField;
   }
+
+  public ToJsonObject() {
+    return {
+      type: this.Type,
+      name: this.Name,
+    };
+  }
 }
