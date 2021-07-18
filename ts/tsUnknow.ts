@@ -1,6 +1,6 @@
 import { Field } from '../proto/field';
 import { EType } from '../type';
-import { BeforeCompare, BeforeMerge } from './decorators';
+import { BeforeCompare, BeforeContain, BeforeMerge } from './decorators';
 import { TsField } from './tsField';
 
 export class TsUnknow extends Field implements TsField {
@@ -8,6 +8,7 @@ export class TsUnknow extends Field implements TsField {
     super(name, EType.Unknow);
   }
 
+  @BeforeContain()
   public Contain(tsField: TsField) {
     return false;
   }

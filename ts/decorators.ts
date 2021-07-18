@@ -1,5 +1,6 @@
 import { EType } from '../type';
 import { TsField } from './tsField';
+import { TsUnion } from './tsUnion';
 
 export function BeforeContain() {
   return function (
@@ -13,6 +14,20 @@ export function BeforeContain() {
       const tsField = args[0] as TsField;
       if (tsField.Hash() === that.Hash()) {
         return true;
+      }
+      if (
+        tsField.Type === EType.Unknow ||
+        that.Type === EType.Unknow
+      ) {
+        return false;
+      }
+      if (
+        tsField.Type === EType.Union &&
+        that.Type !== EType.Union
+      ) {
+        const unionField = tsField as TsUnion;
+        return unionField.Members
+          .every((member) => that.Contain(member));
       }
       const result = original.apply(this, args);
       return result;
