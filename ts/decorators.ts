@@ -12,14 +12,14 @@ export function BeforeContain() {
     descriptor.value = function(...args: any[]) {
       const that = this as TsField;
       const tsField = args[0] as TsField;
-      if (tsField.Hash() === that.Hash()) {
-        return true;
-      }
       if (
         tsField.Type === EType.Unknow ||
         that.Type === EType.Unknow
       ) {
         return false;
+      }
+      if (tsField.Hash() === that.Hash()) {
+        return true;
       }
       if (
         tsField.Type === EType.Union &&
