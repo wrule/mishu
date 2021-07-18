@@ -30,4 +30,8 @@ export class TsNumber extends Field implements TsField {
       name: this.Name,
     };
   }
+
+  public ToModelCode() {
+    return `'${this.Name}': number`;
+  }
 }

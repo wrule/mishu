@@ -35,4 +35,8 @@ export class TsBoolean extends Field implements TsField {
       name: this.Name,
     };
   }
+
+  public ToModelCode() {
+    return `'${this.Name}': boolean`;
+  }
 }

@@ -12,5 +12,5 @@ export interface TsField extends Field {
 
   ToJsonObject(): any;
 
-  // ToCode(): string;
+  ToModelCode(): string;
 }
