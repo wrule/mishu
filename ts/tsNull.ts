@@ -1,6 +1,7 @@
 import { Field } from '../proto/field';
 import { EType } from '../type';
 import { BeforeCompare, BeforeContain, BeforeMerge } from './decorators';
+import { DefineModel } from './defineModel';
 import { TsField } from './tsField';
 import { TsUnion } from './tsUnion';
 
@@ -31,7 +32,7 @@ export class TsNull extends Field implements TsField {
     };
   }
 
-  public ToModelCode() {
-    return `'${this.Name}': null`;
+  public ToDefineModel() {
+    return new DefineModel('null');
   }
 }

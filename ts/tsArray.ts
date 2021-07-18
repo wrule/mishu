@@ -2,6 +2,7 @@
 import { ArrayField } from '../proto/array';
 import { EType } from '../type';
 import { BeforeCompare, BeforeContain, BeforeMerge } from './decorators';
+import { DefineModel } from './defineModel';
 import { TsField } from './tsField';
 import { TsMerger } from './tsMerger';
 import { TsTuple } from './tsTuple';
@@ -87,5 +88,9 @@ export class TsArray extends ArrayField implements TsField {
       name: this.Name,
       element: this.Element.ToJsonObject(),
     };
+  }
+
+  public ToDefineModel() {
+    return new DefineModel(this.Name);
   }
 }

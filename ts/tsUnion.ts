@@ -2,6 +2,7 @@
 import { UnionField } from '../proto/union';
 import { EType } from '../type';
 import { BeforeCompare, BeforeContain, BeforeMerge } from './decorators';
+import { DefineModel } from './defineModel';
 import { TsField } from './tsField';
 import { TsMerger } from './tsMerger';
 
@@ -71,5 +72,9 @@ export class TsUnion extends UnionField implements TsField {
       name: this.Name,
       members: this.Members.map((member) => member.ToJsonObject()),
     };
+  }
+
+  public ToDefineModel() {
+    return new DefineModel(this.Name);
   }
 }

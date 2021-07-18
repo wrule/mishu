@@ -2,6 +2,7 @@
 import { ObjectField } from '../proto/object';
 import { EType } from '../type';
 import { BeforeCompare, BeforeContain, BeforeMerge } from './decorators';
+import { DefineModel } from './defineModel';
 import { TsField } from './tsField';
 import { TsUndefined } from './tsUndefined';
 import { TsUnion } from './tsUnion';
@@ -100,5 +101,9 @@ export class TsObject extends ObjectField implements TsField {
       name: this.Name,
       fields: this.Fields.map((field) => field.ToJsonObject()),
     };
+  }
+
+  public ToDefineModel() {
+    return new DefineModel(this.Name);
   }
 }

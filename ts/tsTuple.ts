@@ -2,6 +2,7 @@
 import { TupleField } from '../proto/tuple';
 import { EType } from '../type';
 import { BeforeCompare, BeforeContain, BeforeMerge } from './decorators';
+import { DefineModel } from './defineModel';
 import { TsField } from './tsField';
 import { TsUndefined } from './tsUndefined';
 import { TsUnion } from './tsUnion';
@@ -86,5 +87,9 @@ export class TsTuple extends TupleField implements TsField {
       name: this.Name,
       elements: this.Elements.map((element) => element.ToJsonObject()),
     };
+  }
+
+  public ToDefineModel() {
+    return new DefineModel(this.Name);
   }
 }
