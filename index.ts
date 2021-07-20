@@ -1,62 +1,29 @@
-import { JsFactory } from './js/jsFactory';
-import { JsonObjectLoader } from './ts/jsonObjectLoader';
 
-let test = null;
+export { JsNull } from './js/jsNull';
+export { JsUndefined } from './js/jsUndefined';
+export { JsBoolean } from './js/jsBoolean';
+export { JsNumber } from './js/jsNumber';
+export { JsString } from './js/jsString';
+export { JsDate } from './js/jsDate';
+export { JsObject } from './js/jsObject';
+export { JsArray } from './js/jsArray';
+export { JsUnknow } from './js/jsUnknow';
+export { JsField } from './js/jsField';
+export { JsFactory } from './js/jsFactory';
 
-test = JsFactory
-  .Create('test', 1)
-  .ToTs()
-  .Merge(
-    JsFactory
-      .Create('test', '123')
-      .ToTs()
-  )
-  .Merge(
-    JsFactory
-      .Create('test', true)
-      .ToTs()
-  )
-  .Merge(
-    JsFactory
-      .Create('test', 1)
-      .ToTs()
-  )
-const jsonObject = test.ToJsonObject();
-console.log(jsonObject);
-const tsField = JsonObjectLoader.Load(jsonObject);
-console.log(tsField);
-
-// test = JsFactory
-//   .Create('test', 1)
-//   .ToTs()
-//   .Merge(
-//     JsFactory
-//       .Create('test', '123')
-//       .ToTs()
-//   )
-//   .Merge(
-//     JsFactory
-//       .Create('test', true)
-//       .ToTs()
-//   )
-// console.log(test);
-
-// test = JsFactory
-//   .Create('test', 1)
-//   .ToTs()
-//   .Merge(
-//     JsFactory
-//       .Create('test', '123')
-//       .ToTs()
-//   );
-// console.log(test);
-
-// test = JsFactory
-//   .Create('test', 1)
-//   .ToTs()
-//   .Merge(
-//     JsFactory
-//       .Create('test', 2)
-//       .ToTs()
-//   );
-// console.log(test);
+export { TsNull } from './ts/tsNull';
+export { TsUndefined } from './ts/tsUndefined';
+export { TsBoolean } from './ts/tsBoolean';
+export { TsNumber } from './ts/tsNumber';
+export { TsString } from './ts/tsString';
+export { TsDate } from './ts/tsDate';
+export { TsObject } from './ts/tsObject';
+export { TsArray } from './ts/tsArray';
+export { TsTuple } from './ts/tsTuple';
+export { TsUnion } from './ts/tsUnion';
+export { TsUnknow } from './ts/tsUnknow';
+export { TsField } from './ts/tsField';
+export { TsMerger } from './ts/tsMerger';
+export { IJsonObject } from './ts/jsonObject';
+export { JsonObjectLoader } from './ts/jsonObjectLoader';
+export { DefineModel } from './ts/defineModel';
