@@ -3,7 +3,7 @@ import { JsArray } from '../js/jsArray';
 import { JsField } from '../js/jsField';
 import { ArrayField } from '../proto/array';
 import { EType } from '../type';
-import { BeforeCompare, BeforeContain, BeforeDefine, BeforeMerge } from './decorators';
+import { BeforeCompare, BeforeContain, BeforeDefine, BeforeMerge, BeforeUpdate } from './decorators';
 import { DefineModel } from './defineModel';
 import { TsField } from './tsField';
 import { TsMerger } from './tsMerger';
@@ -94,8 +94,20 @@ export class TsArray extends ArrayField implements TsField {
     return false;
   }
 
+  @BeforeUpdate()
   public Update(jsField: JsField): TsField {
-    return this as any;
+    const tsField = jsField.ToTs();
+    if (jsField.Type === EType.Array) {
+      if (this.Compare(tsField) >= 0.2) {
+        const jsArrayField = jsField as JsArray;
+        let updatedDst = this.Element;
+        jsArrayField.Elements.forEach((jsElement) => {
+          updatedDst = updatedDst.Update(jsElement);
+        });
+        return new TsArray(this.Name, updatedDst);
+      }
+    }
+    return this.Merge(tsField);
   }
 
   public ToJsonObject() {
