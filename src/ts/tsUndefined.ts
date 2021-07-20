@@ -1,7 +1,7 @@
 import { JsField } from '../js/jsField';
 import { Field } from '../proto/field';
 import { EType } from '../type';
-import { BeforeCompare, BeforeContain, BeforeDefine, BeforeMerge, BeforeUpdate } from './decorators';
+import { BeforeClone, BeforeCompare, BeforeContain, BeforeDefine, BeforeMerge, BeforeUpdate } from './decorators';
 import { DefineModel } from './defineModel';
 import { TsField } from './tsField';
 import { TsUnion } from './tsUnion';
@@ -9,6 +9,11 @@ import { TsUnion } from './tsUnion';
 export class TsUndefined extends Field implements TsField {
   constructor(name: string) {
     super(name, EType.Undefined);
+  }
+
+  @BeforeClone()
+  public Clone(name?: string): TsField {
+    throw new Error('请为Clone方法添加前置装饰器');
   }
 
   @BeforeContain()

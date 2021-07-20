@@ -4,7 +4,7 @@ import { JsObject } from '../js/jsObject';
 import { JsUndefined } from '../js/jsUndefined';
 import { ObjectField } from '../proto/object';
 import { EType } from '../type';
-import { BeforeCompare, BeforeContain, BeforeDefine, BeforeMerge, BeforeUpdate } from './decorators';
+import { BeforeClone, BeforeCompare, BeforeContain, BeforeDefine, BeforeMerge, BeforeUpdate } from './decorators';
 import { DefineModel } from './defineModel';
 import { TsField } from './tsField';
 import { TsUndefined } from './tsUndefined';
@@ -24,6 +24,11 @@ export class TsObject extends ObjectField implements TsField {
 
   public get Fields() {
     return Array.from(this.FieldsMap.values());
+  }
+
+  @BeforeClone()
+  public Clone(name?: string): TsField {
+    throw new Error('请为Clone方法添加前置装饰器');
   }
 
   @BeforeContain()

@@ -1,8 +1,11 @@
 import { JsField } from '../js/jsField';
 import { Field } from '../proto/field';
 import { DefineModel } from './defineModel';
+import { IJsonObject } from './jsonObject';
 
 export interface TsField extends Field {
+  Clone(name?: string): TsField;
+
   Contain(tsField: TsField): boolean;
 
   Compare(tsField: TsField): number;
@@ -13,7 +16,7 @@ export interface TsField extends Field {
 
   Update(jsField: JsField): TsField;
 
-  ToJsonObject(): any;
+  ToJsonObject(): IJsonObject;
 
   ToDefineModel(): DefineModel;
 }

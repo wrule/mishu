@@ -2,7 +2,7 @@
 import { JsField } from '../js/jsField';
 import { UnionField } from '../proto/union';
 import { EType } from '../type';
-import { BeforeCompare, BeforeContain, BeforeDefine, BeforeMerge, BeforeUpdate } from './decorators';
+import { BeforeClone, BeforeCompare, BeforeContain, BeforeDefine, BeforeMerge, BeforeUpdate } from './decorators';
 import { DefineModel } from './defineModel';
 import { TsField } from './tsField';
 import { TsMerger } from './tsMerger';
@@ -17,6 +17,11 @@ export class TsUnion extends UnionField implements TsField {
 
   public get Members() {
     return this.members as TsField[];
+  }
+
+  @BeforeClone()
+  public Clone(name?: string): TsField {
+    throw new Error('请为Clone方法添加前置装饰器');
   }
 
   @BeforeContain()

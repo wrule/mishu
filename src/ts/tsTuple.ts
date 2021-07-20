@@ -4,7 +4,7 @@ import { JsField } from '../js/jsField';
 import { JsUndefined } from '../js/jsUndefined';
 import { TupleField } from '../proto/tuple';
 import { EType } from '../type';
-import { BeforeCompare, BeforeContain, BeforeDefine, BeforeMerge, BeforeUpdate } from './decorators';
+import { BeforeClone, BeforeCompare, BeforeContain, BeforeDefine, BeforeMerge, BeforeUpdate } from './decorators';
 import { DefineModel } from './defineModel';
 import { TsField } from './tsField';
 import { TsMerger } from './tsMerger';
@@ -21,6 +21,11 @@ export class TsTuple extends TupleField implements TsField {
 
   public get Elements() {
     return this.elements as TsField[];
+  }
+
+  @BeforeClone()
+  public Clone(name?: string): TsField {
+    throw new Error('请为Clone方法添加前置装饰器');
   }
 
   @BeforeContain()

@@ -1,7 +1,28 @@
 import { JsField } from '../js/jsField';
 import { EType } from '../type';
+import { JsonObjectLoader } from './jsonObjectLoader';
 import { TsField } from './tsField';
 import { TsUnion } from './tsUnion';
+
+export function BeforeClone() {
+  return function (
+    target: any,
+    key: string | symbol,
+    descriptor: PropertyDescriptor,
+  ) {
+    const original = descriptor.value;
+    descriptor.value = function(...args: any[]) {
+      const that = this as TsField;
+      const name = args[0] as string | undefined;
+      const jsonObject = that.ToJsonObject();
+      if (name !== undefined) {
+        jsonObject.name = name;
+      }
+      return JsonObjectLoader.Load(jsonObject);
+    };
+    return descriptor;
+  };
+}
 
 export function BeforeContain() {
   return function (
