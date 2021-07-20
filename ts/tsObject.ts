@@ -4,7 +4,7 @@ import { JsObject } from '../js/jsObject';
 import { JsUndefined } from '../js/jsUndefined';
 import { ObjectField } from '../proto/object';
 import { EType } from '../type';
-import { BeforeCompare, BeforeContain, BeforeDefine, BeforeMerge } from './decorators';
+import { BeforeCompare, BeforeContain, BeforeDefine, BeforeMerge, BeforeUpdate } from './decorators';
 import { DefineModel } from './defineModel';
 import { TsField } from './tsField';
 import { TsUndefined } from './tsUndefined';
@@ -118,8 +118,34 @@ export class TsObject extends ObjectField implements TsField {
     return false;
   }
 
+  @BeforeUpdate()
   public Update(jsField: JsField): TsField {
-    return this as any;
+    const tsField = jsField.ToTs();
+    if (jsField.Type === EType.Object) {
+      if (this.Compare(tsField) >= 0.2) {
+        const jsObjectField = jsField as JsObject;
+        const allFieldNames = Array.from(new Set(
+          this.Fields
+            .map((field) => field.Name)
+            .concat(jsObjectField.Fields.map((field) => field.Name))
+        ));
+        const newTsFields = allFieldNames.map((fieldName) => {
+          const updateTsField = this.FieldsMap.get(fieldName);
+          const updateJsField = jsObjectField.FieldsMap.get(fieldName);
+          if (!updateTsField && updateJsField) {
+            return updateJsField.ToTs();
+          }
+          if (updateTsField && !updateJsField) {
+            return updateTsField.Update(new JsUndefined(fieldName));
+          }
+          return (updateTsField as TsField).Update(updateJsField as JsField);
+        });
+        return new TsObject(this.Name, new Map<string, TsField>(
+          newTsFields.map((field) => [field.Name, field])
+        ));
+      }
+    }
+    return this.Merge(tsField);
   }
 
   public ToJsonObject() {
