@@ -1,7 +1,7 @@
 import { JsField } from '../js/jsField';
 import { Field } from '../proto/field';
 import { EType } from '../type';
-import { BeforeCompare, BeforeContain, BeforeDefine, BeforeMerge } from './decorators';
+import { BeforeCompare, BeforeContain, BeforeDefine, BeforeMerge, BeforeUpdate } from './decorators';
 import { DefineModel } from './defineModel';
 import { TsField } from './tsField';
 
@@ -30,8 +30,9 @@ export class TsUnknow extends Field implements TsField {
     return false;
   }
 
+  @BeforeUpdate()
   public Update(jsField: JsField): TsField {
-    return this as any;
+    return this.Merge(jsField.ToTs());
   }
 
   public ToJsonObject() {
