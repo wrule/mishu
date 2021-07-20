@@ -6,6 +6,7 @@ import { ObjectField } from '../proto/object';
 import { EType } from '../type';
 import { BeforeClone, BeforeCompare, BeforeContain, BeforeDefine, BeforeMerge, BeforeUpdate } from './decorators';
 import { DefineModel } from './defineModel';
+import { IModel } from './model';
 import { TsField } from './tsField';
 import { TsUndefined } from './tsUndefined';
 import { TsUnion } from './tsUnion';
@@ -153,7 +154,7 @@ export class TsObject extends ObjectField implements TsField {
     return this.Merge(tsField);
   }
 
-  public ToModel() {
+  public ToModel(): IModel {
     return {
       type: this.Type,
       name: this.Name,

@@ -4,6 +4,7 @@ import { UnionField } from '../proto/union';
 import { EType } from '../type';
 import { BeforeClone, BeforeCompare, BeforeContain, BeforeDefine, BeforeMerge, BeforeUpdate } from './decorators';
 import { DefineModel } from './defineModel';
+import { IModel } from './model';
 import { TsField } from './tsField';
 import { TsMerger } from './tsMerger';
 
@@ -83,7 +84,7 @@ export class TsUnion extends UnionField implements TsField {
     return TsMerger.Optimize(this.Name, [...this.Members, tsField]);
   }
 
-  public ToModel() {
+  public ToModel(): IModel {
     return {
       type: this.Type,
       name: this.Name,

@@ -5,6 +5,7 @@ import { ArrayField } from '../proto/array';
 import { EType } from '../type';
 import { BeforeClone, BeforeCompare, BeforeContain, BeforeDefine, BeforeMerge, BeforeUpdate } from './decorators';
 import { DefineModel } from './defineModel';
+import { IModel } from './model';
 import { TsField } from './tsField';
 import { TsMerger } from './tsMerger';
 import { TsTuple } from './tsTuple';
@@ -115,7 +116,7 @@ export class TsArray extends ArrayField implements TsField {
     return this.Merge(tsField);
   }
 
-  public ToModel() {
+  public ToModel(): IModel {
     return {
       type: this.Type,
       name: this.Name,

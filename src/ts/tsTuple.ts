@@ -6,6 +6,7 @@ import { TupleField } from '../proto/tuple';
 import { EType } from '../type';
 import { BeforeClone, BeforeCompare, BeforeContain, BeforeDefine, BeforeMerge, BeforeUpdate } from './decorators';
 import { DefineModel } from './defineModel';
+import { IModel } from './model';
 import { TsField } from './tsField';
 import { TsMerger } from './tsMerger';
 import { TsUndefined } from './tsUndefined';
@@ -133,7 +134,7 @@ export class TsTuple extends TupleField implements TsField {
     return this.Merge(tsField);
   }
 
-  public ToModel() {
+  public ToModel(): IModel {
     return {
       type: this.Type,
       name: this.Name,

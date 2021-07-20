@@ -3,6 +3,7 @@ import { Field } from '../proto/field';
 import { EType } from '../type';
 import { BeforeClone, BeforeCompare, BeforeContain, BeforeDefine, BeforeMerge, BeforeUpdate } from './decorators';
 import { DefineModel } from './defineModel';
+import { IModel } from './model';
 import { TsField } from './tsField';
 import { TsUnion } from './tsUnion';
 
@@ -41,7 +42,7 @@ export class TsNull extends Field implements TsField {
     return this.Merge(jsField.ToTs());
   }
 
-  public ToModel() {
+  public ToModel(): IModel {
     return {
       type: this.Type,
       name: this.Name,
