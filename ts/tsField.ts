@@ -11,7 +11,7 @@ export interface TsField extends Field {
 
   Define(jsField: JsField): boolean;
 
-  // Update(jsField: JsField): TsField;
+  Update(jsField: JsField): TsField;
 
   ToJsonObject(): any;
 
