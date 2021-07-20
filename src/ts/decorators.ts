@@ -1,6 +1,6 @@
 import { JsField } from '../js/jsField';
 import { EType } from '../type';
-import { JsonObjectLoader } from './jsonObjectLoader';
+import { ModelLoader } from './modelLoader';
 import { TsField } from './tsField';
 import { TsUnion } from './tsUnion';
 
@@ -18,7 +18,7 @@ export function BeforeClone() {
       if (name !== undefined) {
         jsonObject.name = name;
       }
-      return JsonObjectLoader.Load(jsonObject);
+      return ModelLoader.Load(jsonObject);
     };
     return descriptor;
   };

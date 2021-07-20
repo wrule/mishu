@@ -1,7 +1,7 @@
 import { JsField } from '../js/jsField';
 import { Field } from '../proto/field';
 import { DefineModel } from './defineModel';
-import { IJsonObject } from './jsonObject';
+import { IModel } from './model';
 
 export interface TsField extends Field {
   Clone(name?: string): TsField;
@@ -16,7 +16,7 @@ export interface TsField extends Field {
 
   Update(jsField: JsField): TsField;
 
-  ToJsonObject(): IJsonObject;
+  ToJsonObject(): IModel;
 
   ToDefineModel(): DefineModel;
 }

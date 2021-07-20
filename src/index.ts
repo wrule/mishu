@@ -24,6 +24,6 @@ export { TsUnion } from './ts/tsUnion';
 export { TsUnknow } from './ts/tsUnknow';
 export { TsField } from './ts/tsField';
 export { TsMerger } from './ts/tsMerger';
-export { IJsonObject } from './ts/jsonObject';
-export { JsonObjectLoader } from './ts/jsonObjectLoader';
+export { IModel } from './ts/model';
+export { ModelLoader } from './ts/modelLoader';
 export { DefineModel } from './ts/defineModel';

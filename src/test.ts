@@ -1,4 +1,4 @@
-import { JsFactory, JsonObjectLoader } from './index';
+import { JsFactory, ModelLoader } from './index';
 
 let test = null;
 
@@ -22,7 +22,7 @@ test = JsFactory
   )
 const jsonObject = test.ToJsonObject();
 console.log(jsonObject);
-const tsField = JsonObjectLoader.Load(jsonObject);
+const tsField = ModelLoader.Load(jsonObject);
 console.log(tsField);
 
 // test = JsFactory
