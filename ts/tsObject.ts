@@ -1,8 +1,10 @@
 
 import { JsField } from '../js/jsField';
+import { JsObject } from '../js/jsObject';
+import { JsUndefined } from '../js/jsUndefined';
 import { ObjectField } from '../proto/object';
 import { EType } from '../type';
-import { BeforeCompare, BeforeContain, BeforeMerge } from './decorators';
+import { BeforeCompare, BeforeContain, BeforeDefine, BeforeMerge } from './decorators';
 import { DefineModel } from './defineModel';
 import { TsField } from './tsField';
 import { TsUndefined } from './tsUndefined';
@@ -96,7 +98,24 @@ export class TsObject extends ObjectField implements TsField {
     }
   }
 
+  @BeforeDefine()
   public Define(jsField: JsField) {
+    if (jsField.Type === EType.Object) {
+      const jsObjectField = jsField as JsObject;
+      if (jsObjectField.Fields.length <= this.Fields.length) {
+        const allFieldNames = Array.from(new Set(
+          this.Fields
+            .map((field) => field.Name)
+            .concat(jsObjectField.Fields.map((field) => field.Name))
+        ));
+        return allFieldNames.every((fieldName) => {
+          const defTsField = this.FieldsMap.get(fieldName);
+          const defJsField = jsObjectField.FieldsMap.get(fieldName) || new JsUndefined(fieldName);
+          return defTsField && defTsField.Define(defJsField);
+        });
+      }
+      return false;
+    }
     return false;
   }
 
