@@ -4,9 +4,10 @@ import { JsField } from '../js/jsField';
 import { JsUndefined } from '../js/jsUndefined';
 import { TupleField } from '../proto/tuple';
 import { EType } from '../type';
-import { BeforeCompare, BeforeContain, BeforeDefine, BeforeMerge } from './decorators';
+import { BeforeCompare, BeforeContain, BeforeDefine, BeforeMerge, BeforeUpdate } from './decorators';
 import { DefineModel } from './defineModel';
 import { TsField } from './tsField';
+import { TsMerger } from './tsMerger';
 import { TsUndefined } from './tsUndefined';
 import { TsUnion } from './tsUnion';
 
@@ -100,8 +101,31 @@ export class TsTuple extends TupleField implements TsField {
     return false;
   }
 
+  @BeforeUpdate()
   public Update(jsField: JsField): TsField {
-    return this as any;
+    const tsField = jsField.ToTs();
+    if (jsField.Type === EType.Array) {
+      if (this.Compare(tsField) >= 0.2) {
+        const jsArrayField = jsField as JsArray;
+        const maxLength = this.Elements.length >= jsArrayField.Elements.length ?
+          this.Elements.length :
+          jsArrayField.Elements.length;
+        const newElements: TsField[] = [];
+        for (let i = 0; i < maxLength; ++i) {
+          const updateTsField = this.Elements[i];
+          const updateJsField = jsArrayField.Elements[i];
+          if (!updateTsField && updateJsField) {
+            newElements.push((new TsUndefined(`element${i}`).Update(updateJsField)));
+          } else if (updateTsField && !updateJsField) {
+            newElements.push(updateTsField.Update(new JsUndefined(`element${i}`)));
+          } else {
+            newElements.push(updateTsField.Update(updateJsField));
+          }
+        }
+        return TsMerger.ArrayMerge(this.Name, newElements);
+      }
+    }
+    return this.Merge(tsField);
   }
 
   public ToJsonObject() {
