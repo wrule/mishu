@@ -1,7 +1,7 @@
 import { JsField } from '../js/jsField';
 import { Field } from '../proto/field';
 import { EType } from '../type';
-import { BeforeCompare, BeforeContain, BeforeMerge } from './decorators';
+import { BeforeCompare, BeforeContain, BeforeDefine, BeforeMerge } from './decorators';
 import { DefineModel } from './defineModel';
 import { TsField } from './tsField';
 
@@ -25,6 +25,7 @@ export class TsUnknow extends Field implements TsField {
     return tsField;
   }
 
+  @BeforeDefine()
   public Define(jsField: JsField) {
     return false;
   }
