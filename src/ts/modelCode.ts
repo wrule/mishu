@@ -1,5 +1,5 @@
 
-export class DefineModel {
+export class ModelCode {
   constructor(
     private name: string,
     private define: string = '',

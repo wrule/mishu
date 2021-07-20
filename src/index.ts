@@ -26,4 +26,4 @@ export { TsField } from './ts/tsField';
 export { TsMerger } from './ts/tsMerger';
 export { IModel } from './ts/model';
 export { ModelLoader } from './ts/modelLoader';
-export { DefineModel } from './ts/defineModel';
+export { ModelCode } from './ts/modelCode';

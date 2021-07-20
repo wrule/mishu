@@ -2,7 +2,7 @@ import { JsField } from '../js/jsField';
 import { Field } from '../proto/field';
 import { EType } from '../type';
 import { BeforeCompare, BeforeContain, BeforeDefine, BeforeMerge, BeforeUpdate } from './decorators';
-import { DefineModel } from './defineModel';
+import { ModelCode } from './modelCode';
 import { IModel } from './model';
 import { ModelLoader } from './modelLoader';
 import { TsField } from './tsField';
@@ -52,7 +52,7 @@ export class TsUnknow extends Field implements TsField {
     };
   }
 
-  public ToDefineModel() {
-    return new DefineModel('any');
+  public ToModelCode() {
+    return new ModelCode('any');
   }
 }

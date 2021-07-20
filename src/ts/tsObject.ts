@@ -5,7 +5,7 @@ import { JsUndefined } from '../js/jsUndefined';
 import { ObjectField } from '../proto/object';
 import { EType } from '../type';
 import { BeforeCompare, BeforeContain, BeforeDefine, BeforeMerge, BeforeUpdate } from './decorators';
-import { DefineModel } from './defineModel';
+import { ModelCode } from './modelCode';
 import { IModel } from './model';
 import { ModelLoader } from './modelLoader';
 import { TsField } from './tsField';
@@ -166,7 +166,7 @@ export class TsObject extends ObjectField implements TsField {
     };
   }
 
-  public ToDefineModel() {
-    return new DefineModel(this.Name);
+  public ToModelCode() {
+    return new ModelCode(this.Name);
   }
 }

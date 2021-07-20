@@ -4,7 +4,7 @@ import { JsField } from '../js/jsField';
 import { ArrayField } from '../proto/array';
 import { EType } from '../type';
 import { BeforeCompare, BeforeContain, BeforeDefine, BeforeMerge, BeforeUpdate } from './decorators';
-import { DefineModel } from './defineModel';
+import { ModelCode } from './modelCode';
 import { IModel } from './model';
 import { ModelLoader } from './modelLoader';
 import { TsField } from './tsField';
@@ -128,7 +128,7 @@ export class TsArray extends ArrayField implements TsField {
     };
   }
 
-  public ToDefineModel() {
-    return new DefineModel(this.Name);
+  public ToModelCode() {
+    return new ModelCode(this.Name);
   }
 }
