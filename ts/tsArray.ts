@@ -1,8 +1,9 @@
 
+import { JsArray } from '../js/jsArray';
 import { JsField } from '../js/jsField';
 import { ArrayField } from '../proto/array';
 import { EType } from '../type';
-import { BeforeCompare, BeforeContain, BeforeMerge } from './decorators';
+import { BeforeCompare, BeforeContain, BeforeDefine, BeforeMerge } from './decorators';
 import { DefineModel } from './defineModel';
 import { TsField } from './tsField';
 import { TsMerger } from './tsMerger';
@@ -83,7 +84,13 @@ export class TsArray extends ArrayField implements TsField {
     }
   }
 
+  @BeforeDefine()
   public Define(jsField: JsField) {
+    if (jsField.Type === EType.Array) {
+      const jsArrayField = jsField as JsArray;
+      return jsArrayField.Elements
+        .every((jsElement) => this.Element.Define(jsElement));
+    }
     return false;
   }
 
