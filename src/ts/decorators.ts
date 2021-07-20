@@ -4,25 +4,25 @@ import { ModelLoader } from './modelLoader';
 import { TsField } from './tsField';
 import { TsUnion } from './tsUnion';
 
-export function BeforeClone() {
-  return function (
-    target: any,
-    key: string | symbol,
-    descriptor: PropertyDescriptor,
-  ) {
-    const original = descriptor.value;
-    descriptor.value = function(...args: any[]) {
-      const that = this as TsField;
-      const name = args[0] as string | undefined;
-      const model = that.ToModel();
-      if (name !== undefined) {
-        model.name = name;
-      }
-      return ModelLoader.Load(model);
-    };
-    return descriptor;
-  };
-}
+// export function BeforeClone() {
+//   return function (
+//     target: any,
+//     key: string | symbol,
+//     descriptor: PropertyDescriptor,
+//   ) {
+//     const original = descriptor.value;
+//     descriptor.value = function(...args: any[]) {
+//       const that = this as TsField;
+//       const name = args[0] as string | undefined;
+//       const model = that.ToModel();
+//       if (name !== undefined) {
+//         model.name = name;
+//       }
+//       return ModelLoader.Load(model);
+//     };
+//     return descriptor;
+//   };
+// }
 
 export function BeforeContain() {
   return function (

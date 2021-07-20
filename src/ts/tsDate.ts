@@ -1,9 +1,10 @@
 import { JsField } from '../js/jsField';
 import { Field } from '../proto/field';
 import { EType } from '../type';
-import { BeforeClone, BeforeCompare, BeforeContain, BeforeDefine, BeforeMerge, BeforeUpdate } from './decorators';
+import { BeforeCompare, BeforeContain, BeforeDefine, BeforeMerge, BeforeUpdate } from './decorators';
 import { DefineModel } from './defineModel';
 import { IModel } from './model';
+import { ModelLoader } from './modelLoader';
 import { TsField } from './tsField';
 import { TsUnion } from './tsUnion';
 
@@ -12,9 +13,12 @@ export class TsDate extends Field implements TsField {
     super(name, EType.Date);
   }
 
-  @BeforeClone()
   public Clone(name?: string): TsField {
-    throw new Error('请为Clone方法添加前置装饰器');
+    const model = this.ToModel();
+    if (name !== undefined) {
+      model.name = name;
+    }
+    return ModelLoader.Load(model);
   }
 
   @BeforeContain()
