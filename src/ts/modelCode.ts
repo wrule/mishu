@@ -11,7 +11,7 @@ export class ModelCode {
    * 类型名称
    */
   public get Name() {
-    return this.name;
+    return this.name.trim() || 'any';
   }
 
   /**
@@ -21,11 +21,18 @@ export class ModelCode {
     return this.define;
   }
 
+  /**
+   * 模块名称
+   */
   public get ModuleName() {
-    return this.Name;
+    const first = this.Name.substr(0, 1).toUpperCase();
+    return `${first}${this.Name.substr(1)}`;
   }
 
+  /**
+   * 接口名称
+   */
   public get InterfaceName() {
-    return this.Name;
+    return `I${this.ModuleName}`;
   }
 }
