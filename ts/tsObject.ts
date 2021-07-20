@@ -114,7 +114,6 @@ export class TsObject extends ObjectField implements TsField {
           return defTsField && defTsField.Define(defJsField);
         });
       }
-      return false;
     }
     return false;
   }
