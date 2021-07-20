@@ -117,6 +117,12 @@ export function BeforeDefine() {
     descriptor.value = function(...args: any[]) {
       const that = this as TsField;
       const jsField = args[0] as JsField;
+      if (
+        jsField.Type === EType.Unknow ||
+        that.Type === EType.Unknow
+      ) {
+        return false;
+      }
       if (jsField.Hash() === that.Hash()) {
         return true;
       }
