@@ -14,11 +14,11 @@ export function BeforeClone() {
     descriptor.value = function(...args: any[]) {
       const that = this as TsField;
       const name = args[0] as string | undefined;
-      const jsonObject = that.ToModel();
+      const model = that.ToModel();
       if (name !== undefined) {
-        jsonObject.name = name;
+        model.name = name;
       }
-      return ModelLoader.Load(jsonObject);
+      return ModelLoader.Load(model);
     };
     return descriptor;
   };
@@ -101,13 +101,13 @@ export function BeforeMerge() {
       const that = this as TsField;
       const tsField = args[0] as TsField;
       if (tsField.Hash() === that.Hash()) {
-        return that;
+        return that.Clone();
       }
       if (that.Contain(tsField)) {
-        return that;
+        return that.Clone();
       }
       if (tsField.Type === EType.Unknow) {
-        return that;
+        return that.Clone();
       }
       if (
         tsField.Type === EType.Array &&
@@ -165,7 +165,7 @@ export function BeforeUpdate() {
       const that = this as TsField;
       const jsField = args[0] as JsField;
       if (jsField.Hash() === that.Hash()) {
-        return that;
+        return that.Clone();
       }
       const result = original.apply(this, args);
       return result;
