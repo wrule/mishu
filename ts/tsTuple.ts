@@ -1,8 +1,10 @@
 
+import { JsArray } from '../js/jsArray';
 import { JsField } from '../js/jsField';
+import { JsUndefined } from '../js/jsUndefined';
 import { TupleField } from '../proto/tuple';
 import { EType } from '../type';
-import { BeforeCompare, BeforeContain, BeforeMerge } from './decorators';
+import { BeforeCompare, BeforeContain, BeforeDefine, BeforeMerge } from './decorators';
 import { DefineModel } from './defineModel';
 import { TsField } from './tsField';
 import { TsUndefined } from './tsUndefined';
@@ -82,7 +84,19 @@ export class TsTuple extends TupleField implements TsField {
     }
   }
 
+  @BeforeDefine()
   public Define(jsField: JsField) {
+    if (jsField.Type === EType.Array) {
+      const jsArrayField = jsField as JsArray;
+      if (jsArrayField.Elements.length <= this.Elements.length) {
+        return this.Elements.every((tsElement, index) => (
+          tsElement.Define(
+            jsArrayField.Elements[index] ||
+            new JsUndefined(`element${index}`)
+          )
+        ));
+      }
+    }
     return false;
   }
 
