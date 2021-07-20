@@ -26,6 +26,10 @@ export class TsDate extends Field implements TsField {
     return new TsUnion(this.Name, [this, tsField]);
   }
 
+  public Define(jsField: JsField) {
+    return false;
+  }
+
   public Update(jsField: JsField): TsField {
     return this as any;
   }

@@ -67,6 +67,10 @@ export class TsUnion extends UnionField implements TsField {
     return TsMerger.Optimize(this.Name, newMembers);
   }
 
+  public Define(jsField: JsField) {
+    return false;
+  }
+
   public Update(jsField: JsField): TsField {
     return this as any;
   }

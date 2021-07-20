@@ -25,6 +25,10 @@ export class TsUnknow extends Field implements TsField {
     return tsField;
   }
 
+  public Define(jsField: JsField) {
+    return false;
+  }
+
   public Update(jsField: JsField): TsField {
     return this as any;
   }

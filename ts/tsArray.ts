@@ -83,6 +83,10 @@ export class TsArray extends ArrayField implements TsField {
     }
   }
 
+  public Define(jsField: JsField) {
+    return false;
+  }
+
   public Update(jsField: JsField): TsField {
     return this as any;
   }

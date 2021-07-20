@@ -26,11 +26,8 @@ export class TsBoolean extends Field implements TsField {
     return new TsUnion(this.Name, [this, tsField]);
   }
 
-  public Update(jsField: JsField): TsField {
-    if (jsField.Type === this.Type) {
-      return this;
-    }
-    return new TsUnion(this.Name, [this, jsField.ToTs()]);
+  public Define(jsField: JsField) {
+    return false;
   }
 
   public ToJsonObject() {

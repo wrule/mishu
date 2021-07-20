@@ -1,3 +1,4 @@
+import { JsField } from '../js/jsField';
 import { EType } from '../type';
 import { TsField } from './tsField';
 import { TsUnion } from './tsUnion';
@@ -98,6 +99,26 @@ export function BeforeMerge() {
         that.Type !== EType.Union
       ) {
         return tsField.Merge(that);
+      }
+      const result = original.apply(this, args);
+      return result;
+    };
+    return descriptor;
+  };
+}
+
+export function BeforeUpdate() {
+  return function (
+    target: any,
+    key: string | symbol,
+    descriptor: PropertyDescriptor,
+  ) {
+    const original = descriptor.value;
+    descriptor.value = function(...args: any[]) {
+      const that = this as TsField;
+      const jsField = args[0] as JsField;
+      if (jsField.Hash() === that.Hash()) {
+        return that;
       }
       const result = original.apply(this, args);
       return result;
