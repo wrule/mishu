@@ -2,7 +2,7 @@
 import { JsField } from '../js/jsField';
 import { UnionField } from '../proto/union';
 import { EType } from '../type';
-import { BeforeCompare, BeforeContain, BeforeMerge } from './decorators';
+import { BeforeCompare, BeforeContain, BeforeDefine, BeforeMerge } from './decorators';
 import { DefineModel } from './defineModel';
 import { TsField } from './tsField';
 import { TsMerger } from './tsMerger';
@@ -67,8 +67,9 @@ export class TsUnion extends UnionField implements TsField {
     return TsMerger.Optimize(this.Name, newMembers);
   }
 
+  @BeforeDefine()
   public Define(jsField: JsField) {
-    return false;
+    return this.Members.some((member) => member.Define(jsField));
   }
 
   public Update(jsField: JsField): TsField {
