@@ -115,11 +115,11 @@ export class TsArray extends ArrayField implements TsField {
     return this.Merge(tsField);
   }
 
-  public ToJsonObject() {
+  public ToModel() {
     return {
       type: this.Type,
       name: this.Name,
-      element: this.Element.ToJsonObject(),
+      element: this.Element.ToModel(),
     };
   }
 

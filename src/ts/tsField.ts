@@ -16,7 +16,7 @@ export interface TsField extends Field {
 
   Update(jsField: JsField): TsField;
 
-  ToJsonObject(): IModel;
+  ToModel(): IModel;
 
   ToDefineModel(): DefineModel;
 }

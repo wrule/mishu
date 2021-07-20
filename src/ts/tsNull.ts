@@ -41,7 +41,7 @@ export class TsNull extends Field implements TsField {
     return this.Merge(jsField.ToTs());
   }
 
-  public ToJsonObject() {
+  public ToModel() {
     return {
       type: this.Type,
       name: this.Name,

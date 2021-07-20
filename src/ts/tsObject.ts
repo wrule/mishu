@@ -153,11 +153,11 @@ export class TsObject extends ObjectField implements TsField {
     return this.Merge(tsField);
   }
 
-  public ToJsonObject() {
+  public ToModel() {
     return {
       type: this.Type,
       name: this.Name,
-      fields: this.Fields.map((field) => field.ToJsonObject()),
+      fields: this.Fields.map((field) => field.ToModel()),
     };
   }
 

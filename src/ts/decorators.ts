@@ -14,7 +14,7 @@ export function BeforeClone() {
     descriptor.value = function(...args: any[]) {
       const that = this as TsField;
       const name = args[0] as string | undefined;
-      const jsonObject = that.ToJsonObject();
+      const jsonObject = that.ToModel();
       if (name !== undefined) {
         jsonObject.name = name;
       }

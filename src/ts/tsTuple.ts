@@ -133,11 +133,11 @@ export class TsTuple extends TupleField implements TsField {
     return this.Merge(tsField);
   }
 
-  public ToJsonObject() {
+  public ToModel() {
     return {
       type: this.Type,
       name: this.Name,
-      elements: this.Elements.map((element) => element.ToJsonObject()),
+      elements: this.Elements.map((element) => element.ToModel()),
     };
   }
 

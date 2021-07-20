@@ -20,7 +20,7 @@ test = JsFactory
       .Create('test', 1)
       .ToTs()
   )
-const jsonObject = test.ToJsonObject();
+const jsonObject = test.ToModel();
 console.log(jsonObject);
 const tsField = ModelLoader.Load(jsonObject);
 console.log(tsField);

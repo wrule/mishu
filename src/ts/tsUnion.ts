@@ -83,11 +83,11 @@ export class TsUnion extends UnionField implements TsField {
     return TsMerger.Optimize(this.Name, [...this.Members, tsField]);
   }
 
-  public ToJsonObject() {
+  public ToModel() {
     return {
       type: this.Type,
       name: this.Name,
-      members: this.Members.map((member) => member.ToJsonObject()),
+      members: this.Members.map((member) => member.ToModel()),
     };
   }
 
