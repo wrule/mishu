@@ -76,7 +76,7 @@ export class TsMerger {
     if (optimizedMembers.length < 1) {
       return new TsArray(name, new TsUnknow('element'));
     } else if (optimizedMembers.length < 2) {
-      return new TsArray(name, optimizedMembers[0].UpdateName('element'));
+      return new TsArray(name, optimizedMembers[0].Clone('element'));
     } else {
       const threshold = optimizedMembers.length / elements.length;
       if (threshold <= 0.4) {
@@ -102,7 +102,7 @@ export class TsMerger {
     if (optimizedMembers.length < 1) {
       return new TsUnknow(name);
     } else if (optimizedMembers.length < 2) {
-      return optimizedMembers[0].UpdateName(name);
+      return optimizedMembers[0].Clone(name);
     } else {
       return new TsUnion(name, optimizedMembers);
     }
