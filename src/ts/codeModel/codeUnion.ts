@@ -4,8 +4,9 @@ import { TsUnion } from '../tsUnion';
 export class CodeUnion extends CodeModel {
   constructor(
     tsField: TsUnion,
+    parent?: CodeModel,
   ) {
-    super(tsField);
+    super(tsField, parent);
   }
 
   public get TsField(): TsUnion {

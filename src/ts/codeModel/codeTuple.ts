@@ -4,8 +4,9 @@ import { TsTuple } from '../tsTuple';
 export class CodeTuple extends CodeModel {
   constructor(
     tsField: TsTuple,
+    parent?: CodeModel,
   ) {
-    super(tsField);
+    super(tsField, parent);
   }
 
   public get TsField(): TsTuple {

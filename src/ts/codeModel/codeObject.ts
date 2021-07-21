@@ -5,8 +5,9 @@ import { TsField } from '../tsField';
 export class CodeObject extends CodeModel {
   constructor(
     tsField: TsObject,
+    parent?: CodeModel,
   ) {
-    super(tsField);
+    super(tsField, parent);
   }
 
   public get TsField(): TsObject {

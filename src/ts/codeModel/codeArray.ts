@@ -4,8 +4,9 @@ import { TsArray } from '../tsArray';
 export class CodeArray extends CodeModel {
   constructor(
     tsField: TsArray,
+    parent?: CodeModel,
   ) {
-    super(tsField);
+    super(tsField, parent);
   }
 
   public get TsField(): TsArray {
