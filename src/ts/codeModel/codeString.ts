@@ -9,6 +9,10 @@ export class CodeString extends CodeModel {
     super(tsField, parent);
   }
 
+  public ModuleCodeModels(): CodeModel[] {
+    return [];
+  }
+
   public get InterfaceName() {
     return 'string';
   }

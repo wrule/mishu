@@ -9,6 +9,10 @@ export class CodeNumber extends CodeModel {
     super(tsField, parent);
   }
 
+  public ModuleCodeModels(): CodeModel[] {
+    return [];
+  }
+
   public get InterfaceName() {
     return 'number';
   }

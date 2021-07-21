@@ -14,6 +14,8 @@ export abstract class CodeModel {
     return this.parent;
   }
 
+  abstract ModuleCodeModels(): CodeModel[];
+
   abstract InterfaceName: string;
 
   abstract InterfaceNameInContext: string;
