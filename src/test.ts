@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { JsFactory } from './index';
+import { TS, TSCode } from './index';
 
 // const jsonObject = {
 //   "name": "jimao",
@@ -29,11 +29,6 @@ import { JsFactory } from './index';
 //   "unknow": []
 // };
 
-const jsonObject = [1, 2, 3];
-
-const jsField = JsFactory.Create('rsp', jsonObject);
-const tsField = jsField.ToTs();
-const modelCode = tsField.ToCodeModel();
-console.log(modelCode.InterfaceName);
-
+const modelCode = TS('').Merge(TS(1)).ToCodeModel();
+console.log(modelCode.InterfaceNameInContext);
 fs.writeFileSync('output/output.ts', modelCode.DefineCode);
