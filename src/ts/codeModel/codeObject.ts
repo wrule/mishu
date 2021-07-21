@@ -8,6 +8,10 @@ export class CodeObject extends CodeModel {
     super(tsField);
   }
 
+  public get TsField(): TsObject {
+    return this.tsField as TsObject;
+  }
+
   public get ModuleName() {
     const name = this.Name.trim() || 'any';
     const first = name.substr(0, 1).toUpperCase();
@@ -22,6 +26,14 @@ export class CodeObject extends CodeModel {
     return `
 //#region ${this.InterfaceName}
 export interface ${this.InterfaceName} {
+${
+  this.TsField.Fields
+    .map(
+      (field) =>
+        `  ${field.Name}: ${field.ToCodeModel().InterfaceName};`
+    )
+    .join('\n')
+}
 }
 //#endregion 
     `.trim();
