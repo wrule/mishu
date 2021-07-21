@@ -8,6 +8,10 @@ export class CodeArray extends CodeModel {
     super(tsField);
   }
 
+  public get TsField(): TsArray {
+    return this.tsField as TsArray;
+  }
+
   public get ModuleName() {
     const name = this.Name.trim() || 'any';
     const first = name.substr(0, 1).toUpperCase();
@@ -15,7 +19,7 @@ export class CodeArray extends CodeModel {
   }
 
   public get InterfaceName() {
-    return `I${this.ModuleName}`;
+    return `${this.TsField.Element.ToCodeModel().InterfaceName}[]`;
   }
 
   public get DefineCode() {

@@ -8,6 +8,10 @@ export class CodeUnion extends CodeModel {
     super(tsField);
   }
 
+  public get TsField(): TsUnion {
+    return this.tsField as TsUnion;
+  }
+
   public get ModuleName() {
     const name = this.Name.trim() || 'any';
     const first = name.substr(0, 1).toUpperCase();
@@ -15,7 +19,11 @@ export class CodeUnion extends CodeModel {
   }
 
   public get InterfaceName() {
-    return `I${this.ModuleName}`;
+    return `(${
+      this.TsField.Members
+        .map((member) => member.ToCodeModel().InterfaceName)
+        .join(' | ')
+    })`;
   }
 
   public get DefineCode() {
