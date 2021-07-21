@@ -13,20 +13,26 @@ export class CodeObject extends CodeModel {
     return this.tsField as TsObject;
   }
 
+  /**
+   * 模块名称
+   */
   public get ModuleName() {
-    const name = this.Name.trim() || 'any';
+    const name = this.Name.trim() || 'something';
     const first = name.substr(0, 1).toUpperCase();
     return `${first}${name.substr(1)}`;
   }
 
+  /**
+   * 接口名称
+   */
   public get InterfaceName() {
     return `I${this.ModuleName}`;
   }
 
   public get DefineCode() {
-    let result = this.DefineInterfaceCode;
-    const moduleCode = this.DefineModuleCode;
-    if (moduleCode) {
+    let result = this.InterfaceDefineCode;
+    const moduleCode = this.ModuleDefineCode;
+    if (moduleCode.trim()) {
       result += `\n\n${moduleCode}`;
     }
     return result;
@@ -40,7 +46,32 @@ export class CodeObject extends CodeModel {
     return tsFields.map((tsField) => tsField.ToCodeModel());
   }
 
-  public get DefineModuleCode() {
+
+  /**
+   * 接口定义部分代码
+   */
+  public get InterfaceDefineCode() {
+    return `
+//#region ${this.InterfaceName}接口定义
+export interface ${this.InterfaceName} {
+${
+  this.TsField.Fields
+    .map(
+      (field) =>
+        `  ${field.Name}: ${field.ToCodeModel().InterfaceName};`
+    )
+    .join('\n')
+}
+}
+//#endregion 
+    `.trim();
+  }
+
+
+  /**
+   * 模块定义部分代码
+   */
+  public get ModuleDefineCode() {
     const moduleCodeModels = this.ModuleCodeModels();
     if (moduleCodeModels.length < 1) {
       return '';
@@ -60,24 +91,7 @@ ${defineCode}
     `.trim();
   }
 
-  public get DefineInterfaceCode() {
-    return `
-//#region ${this.InterfaceName}接口定义
-export interface ${this.InterfaceName} {
-${
-  this.TsField.Fields
-    .map(
-      (field) =>
-        `  ${field.Name}: ${field.ToCodeModel().InterfaceName};`
-    )
-    .join('\n')
-}
-}
-//#endregion 
-    `.trim();
-  }
-
   public get ExampleCode() {
-    return `let ${this.Name}: ${this.InterfaceName} = { } as any;`;
+    return `// let ${this.Name}: ${this.InterfaceName} = { } as any;`;
   }
 }
