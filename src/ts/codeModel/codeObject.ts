@@ -49,8 +49,9 @@ ${
   this.TsField.Fields
     .map(
       (field) =>
-        `  ${field.Name}: ${field.ToCodeModel().InterfaceName};`
+        `  ['${field.Name}']: ${field.ToCodeModel().InterfaceName};`
     )
+    .concat(['  [propName: string]: any;'])
     .join('\n')
 }
 }
