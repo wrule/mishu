@@ -4,8 +4,9 @@ import { TsUndefined } from '../tsUndefined';
 export class CodeUndefined extends CodeModel {
   constructor(
     tsField: TsUndefined,
+    parent?: CodeModel,
   ) {
-    super(tsField);
+    super(tsField, parent);
   }
 
   public get InterfaceName() {

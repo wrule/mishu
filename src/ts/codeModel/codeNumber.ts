@@ -4,8 +4,9 @@ import { TsNumber } from '../tsNumber';
 export class CodeNumber extends CodeModel {
   constructor(
     tsField: TsNumber,
+    parent?: CodeModel,
   ) {
-    super(tsField);
+    super(tsField, parent);
   }
 
   public get InterfaceName() {

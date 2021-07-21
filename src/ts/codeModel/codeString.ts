@@ -4,8 +4,9 @@ import { TsString } from '../tsString';
 export class CodeString extends CodeModel {
   constructor(
     tsField: TsString,
+    parent?: CodeModel,
   ) {
-    super(tsField);
+    super(tsField, parent);
   }
 
   public get InterfaceName() {

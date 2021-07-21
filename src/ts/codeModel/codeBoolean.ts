@@ -4,8 +4,9 @@ import { TsBoolean } from '../tsBoolean';
 export class CodeBoolean extends CodeModel {
   constructor(
     tsField: TsBoolean,
+    parent?: CodeModel,
   ) {
-    super(tsField);
+    super(tsField, parent);
   }
 
   public get InterfaceName() {
