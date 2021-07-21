@@ -1,6 +1,7 @@
 import { JsField } from '../js/jsField';
 import { Field } from '../proto/field';
 import { EType } from '../type';
+import { CodeModel } from './codeModel/codeModel';
 import { CodeNull } from './codeModel/codeNull';
 import { BeforeCompare, BeforeContain, BeforeDefine, BeforeMerge, BeforeUpdate } from './decorators';
 import { IModel } from './model';
@@ -53,8 +54,8 @@ export class TsNull extends Field implements TsField {
     };
   }
 
-  public ToCodeModel() {
-    return new CodeNull(this);
+  public ToCodeModel(parent?: CodeModel) {
+    return new CodeNull(this, parent);
   }
 
   public DomainTsFields(): TsField[] {

@@ -2,6 +2,7 @@ import { JsField } from '../js/jsField';
 import { Field } from '../proto/field';
 import { EType } from '../type';
 import { CodeDate } from './codeModel/codeDate';
+import { CodeModel } from './codeModel/codeModel';
 import { BeforeCompare, BeforeContain, BeforeDefine, BeforeMerge, BeforeUpdate } from './decorators';
 import { IModel } from './model';
 import { ModelLoader } from './modelLoader';
@@ -53,8 +54,8 @@ export class TsDate extends Field implements TsField {
     };
   }
 
-  public ToCodeModel() {
-    return new CodeDate(this);
+  public ToCodeModel(parent?: CodeModel) {
+    return new CodeDate(this, parent);
   }
 
   public DomainTsFields(): TsField[] {

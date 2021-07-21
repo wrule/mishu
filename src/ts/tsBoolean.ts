@@ -7,6 +7,7 @@ import { IModel } from './model';
 import { ModelLoader } from './modelLoader';
 import { TsField } from './tsField';
 import { TsUnion } from './tsUnion';
+import { CodeModel } from './codeModel/codeModel';
 
 export class TsBoolean extends Field implements TsField {
   constructor(name: string) {
@@ -53,8 +54,8 @@ export class TsBoolean extends Field implements TsField {
     };
   }
 
-  public ToCodeModel() {
-    return new CodeBoolean(this);
+  public ToCodeModel(parent?: CodeModel) {
+    return new CodeBoolean(this, parent);
   }
 
   public DomainTsFields(): TsField[] {
