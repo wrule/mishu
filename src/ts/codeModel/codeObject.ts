@@ -1,5 +1,6 @@
 import { CodeModel } from './codeModel';
 import { TsObject } from '../tsObject';
+import { TsField } from '../tsField';
 
 export class CodeObject extends CodeModel {
   constructor(
@@ -31,9 +32,26 @@ export class CodeObject extends CodeModel {
     return result;
   }
 
+  public ModuleCodeModels(): CodeModel[] {
+    const tsFields: TsField[] = [];
+    this.TsField.Fields.forEach((field) => {
+      tsFields.push(...field.DomainTsFields());
+    });
+    return tsFields.map((tsField) => tsField.ToCodeModel());
+  }
+
   public get DefineModuleCode() {
+    const moduleCodeModels = this.ModuleCodeModels();
+    if (moduleCodeModels.length < 1) {
+      return '';
+    }
     return `
 //#region ${this.ModuleName}模块定义，此模块包含${this.InterfaceName}接口下所有子级接口定义
+export module ${this.ModuleName} {
+${moduleCodeModels
+  .map((codeModel) => codeModel.DefineCode)
+  .join('\n\n')}
+}
 //#endregion
     `.trim();
   }
@@ -53,5 +71,9 @@ ${
 }
 //#endregion 
     `.trim();
+  }
+
+  public get ExampleCode() {
+    return `let ${this.Name}: ${this.InterfaceName} = { } as any;`;
   }
 }
