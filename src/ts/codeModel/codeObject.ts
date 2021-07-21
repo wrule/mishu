@@ -42,7 +42,7 @@ export class CodeObject extends CodeModel {
   /**
    * 接口定义部分代码
    */
-  public get InterfaceDefineCode() {
+  public get InterfaceDefineCode(): string {
     return `
 //#region ${this.InterfaceName}接口定义
 export interface ${this.InterfaceName} {
@@ -50,7 +50,7 @@ ${
   this.TsField.Fields
     .map(
       (field) =>
-        `  ['${field.Name}']: ${field.ToCodeModel().InterfaceName};`
+        `  ['${field.Name}']: ${field.ToCodeModel(this).InterfaceName};`
     )
     .concat(['  [propName: string]: any;'])
     .join('\n')
