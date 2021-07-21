@@ -23,8 +23,24 @@ export class CodeObject extends CodeModel {
   }
 
   public get DefineCode() {
+    let result = this.DefineInterfaceCode;
+    const moduleCode = this.DefineModuleCode;
+    if (moduleCode) {
+      result += `\n\n${moduleCode}`;
+    }
+    return result;
+  }
+
+  public get DefineModuleCode() {
     return `
-//#region ${this.InterfaceName}
+//#region ${this.ModuleName}模块定义，此模块包含${this.InterfaceName}接口下所有子级接口定义
+//#endregion
+    `.trim();
+  }
+
+  public get DefineInterfaceCode() {
+    return `
+//#region ${this.InterfaceName}接口定义
 export interface ${this.InterfaceName} {
 ${
   this.TsField.Fields
