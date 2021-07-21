@@ -45,12 +45,16 @@ export class CodeObject extends CodeModel {
     if (moduleCodeModels.length < 1) {
       return '';
     }
+    const defineCode = moduleCodeModels
+      .map((codeModel) => codeModel.DefineCode)
+      .join('\n\n')
+      .split('\n')
+      .map((line) => `  ${line}`)
+      .join('\n');
     return `
 //#region ${this.ModuleName}模块定义，此模块包含${this.InterfaceName}接口下所有子级接口定义
 export module ${this.ModuleName} {
-${moduleCodeModels
-  .map((codeModel) => codeModel.DefineCode)
-  .join('\n\n')}
+${defineCode}
 }
 //#endregion
     `.trim();

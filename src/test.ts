@@ -1,4 +1,5 @@
-import { JsFactory, ModelLoader } from './index';
+import fs from 'fs';
+import { JsFactory } from './index';
 
 const jsonObject = {
   "name": "jimao",
@@ -13,7 +14,17 @@ const jsonObject = {
   ],
   "meta": {
     "color": "red",
-    "lang": ["js", "ts", "c/c++", "go", "c#"]
+    "lang": ["js", "ts", "c/c++", "go", "c#", 12, true, 12, 12, 12]
+  },
+  "korean": {
+    "movie": 13,
+    "name": "korean",
+    "nini": null,
+    "bj": {
+      "roomId": "sjsjjdhd",
+      "fansNum": 12228277,
+      "test": ["112", true]
+    }
   },
   "unknow": []
 };
@@ -22,4 +33,5 @@ const jsField = JsFactory.Create('rsp', jsonObject);
 const tsField = jsField.ToTs();
 const modelCode = tsField.ToCodeModel();
 console.log(modelCode.InterfaceName);
-console.log(modelCode.DefineCode);
+
+fs.writeFileSync('output/output.ts', modelCode.DefineCode);
