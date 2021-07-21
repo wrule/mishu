@@ -15,6 +15,18 @@ export class CodeObject extends CodeModel {
   }
 
   /**
+   * 模块内的CodeModel列表
+   * @returns CodeModel列表
+   */
+   public ModuleCodeModels(): CodeModel[] {
+    const tsFields: TsField[] = [];
+    this.TsField.Fields.forEach((field) => {
+      tsFields.push(...field.DomainTsFields());
+    });
+    return tsFields.map((tsField) => tsField.ToCodeModel(this));
+  }
+
+  /**
    * 模块名称
    */
   public get ModuleName() {
@@ -66,18 +78,6 @@ ${
 }
 //#endregion 
     `.trim();
-  }
-
-  /**
-   * 模块内的CodeModel列表
-   * @returns CodeModel列表
-   */
-  public ModuleCodeModels(): CodeModel[] {
-    const tsFields: TsField[] = [];
-    this.TsField.Fields.forEach((field) => {
-      tsFields.push(...field.DomainTsFields());
-    });
-    return tsFields.map((tsField) => tsField.ToCodeModel());
   }
 
   /**
