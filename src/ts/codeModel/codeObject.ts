@@ -38,15 +38,6 @@ export class CodeObject extends CodeModel {
     return result;
   }
 
-  public ModuleCodeModels(): CodeModel[] {
-    const tsFields: TsField[] = [];
-    this.TsField.Fields.forEach((field) => {
-      tsFields.push(...field.DomainTsFields());
-    });
-    return tsFields.map((tsField) => tsField.ToCodeModel());
-  }
-
-
   /**
    * 接口定义部分代码
    */
@@ -67,6 +58,17 @@ ${
     `.trim();
   }
 
+  /**
+   * 模块内的CodeModel列表
+   * @returns CodeModel列表
+   */
+  public ModuleCodeModels(): CodeModel[] {
+    const tsFields: TsField[] = [];
+    this.TsField.Fields.forEach((field) => {
+      tsFields.push(...field.DomainTsFields());
+    });
+    return tsFields.map((tsField) => tsField.ToCodeModel());
+  }
 
   /**
    * 模块定义部分代码
