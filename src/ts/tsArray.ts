@@ -131,4 +131,8 @@ export class TsArray extends ArrayField implements TsField {
   public ToModelCode() {
     return new ModelCode(this.Name);
   }
+
+  public DomainTsFields(): TsField[] {
+    return this.Element.DomainTsFields();
+  }
 }

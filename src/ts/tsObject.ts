@@ -169,4 +169,8 @@ export class TsObject extends ObjectField implements TsField {
   public ToModelCode() {
     return new ModelCode(this.Name);
   }
+
+  public DomainTsFields(): TsField[] {
+    return [this];
+  }
 }

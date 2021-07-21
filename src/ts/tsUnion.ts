@@ -99,4 +99,12 @@ export class TsUnion extends UnionField implements TsField {
   public ToModelCode() {
     return new ModelCode(this.Name);
   }
+
+  public DomainTsFields(): TsField[] {
+    const result: TsField[] = [];
+    this.Members.forEach((member) => {
+      result.push(...member.DomainTsFields());
+    });
+    return result;
+  }
 }

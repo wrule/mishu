@@ -149,4 +149,12 @@ export class TsTuple extends TupleField implements TsField {
   public ToModelCode() {
     return new ModelCode(this.Name);
   }
+
+  public DomainTsFields(): TsField[] {
+    const result: TsField[] = [];
+    this.Elements.forEach((element) => {
+      result.push(...element.DomainTsFields());
+    });
+    return result;
+  }
 }
