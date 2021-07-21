@@ -32,11 +32,6 @@ export class CodeTuple extends CodeModel {
   }
 
   public get DefineCode() {
-    return `
-//#region ${this.InterfaceName}
-export interface ${this.InterfaceName} {
-}
-//#endregion 
-    `.trim();
+    return '';
   }
 }
