@@ -11,6 +11,7 @@ import { TsField } from './tsField';
 import { TsUndefined } from './tsUndefined';
 import { TsUnion } from './tsUnion';
 import { CodeObject } from './codeModel/codeObject';
+import { CodeModel } from './codeModel/codeModel';
 
 export class TsObject extends ObjectField implements TsField {
   constructor(
@@ -166,8 +167,8 @@ export class TsObject extends ObjectField implements TsField {
     };
   }
 
-  public ToCodeModel() {
-    return new CodeObject(this);
+  public ToCodeModel(parent?: CodeModel) {
+    return new CodeObject(this, parent);
   }
 
   public DomainTsFields(): TsField[] {

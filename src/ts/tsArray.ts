@@ -4,6 +4,7 @@ import { JsField } from '../js/jsField';
 import { ArrayField } from '../proto/array';
 import { EType } from '../type';
 import { CodeArray } from './codeModel/codeArray';
+import { CodeModel } from './codeModel/codeModel';
 import { BeforeCompare, BeforeContain, BeforeDefine, BeforeMerge, BeforeUpdate } from './decorators';
 import { IModel } from './model';
 import { ModelLoader } from './modelLoader';
@@ -128,8 +129,8 @@ export class TsArray extends ArrayField implements TsField {
     };
   }
 
-  public ToCodeModel() {
-    return new CodeArray(this);
+  public ToCodeModel(parent?: CodeModel) {
+    return new CodeArray(this, parent);
   }
 
   public DomainTsFields(): TsField[] {

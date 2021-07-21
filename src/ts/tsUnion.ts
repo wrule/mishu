@@ -2,6 +2,7 @@
 import { JsField } from '../js/jsField';
 import { UnionField } from '../proto/union';
 import { EType } from '../type';
+import { CodeModel } from './codeModel/codeModel';
 import { CodeUnion } from './codeModel/codeUnion';
 import { BeforeCompare, BeforeContain, BeforeDefine, BeforeMerge, BeforeUpdate } from './decorators';
 import { IModel } from './model';
@@ -96,8 +97,8 @@ export class TsUnion extends UnionField implements TsField {
     };
   }
 
-  public ToCodeModel() {
-    return new CodeUnion(this);
+  public ToCodeModel(parent?: CodeModel) {
+    return new CodeUnion(this, parent);
   }
 
   public DomainTsFields(): TsField[] {
