@@ -56,4 +56,8 @@ export class TsDate extends Field implements TsField {
   public ToModelCode() {
     return new ModelCode('Date');
   }
+
+  public DomainTsFields(): TsField[] {
+    return [];
+  }
 }

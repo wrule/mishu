@@ -56,4 +56,8 @@ export class TsUndefined extends Field implements TsField {
   public ToModelCode() {
     return new ModelCode('undefined');
   }
+
+  public DomainTsFields(): TsField[] {
+    return [];
+  }
 }

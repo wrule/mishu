@@ -19,4 +19,6 @@ export interface TsField extends Field {
   ToModel(): IModel;
 
   ToModelCode(): ModelCode;
+
+  DomainTsFields(): TsField[];
 }

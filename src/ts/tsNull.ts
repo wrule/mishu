@@ -56,4 +56,8 @@ export class TsNull extends Field implements TsField {
   public ToModelCode() {
     return new ModelCode('null');
   }
+
+  public DomainTsFields(): TsField[] {
+    return [];
+  }
 }

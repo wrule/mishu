@@ -56,4 +56,8 @@ export class TsString extends Field implements TsField {
   public ToModelCode() {
     return new ModelCode('string');
   }
+
+  public DomainTsFields(): TsField[] {
+    return [];
+  }
 }
