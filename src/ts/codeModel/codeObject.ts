@@ -30,6 +30,14 @@ export class CodeObject extends CodeModel {
     return `I${this.ModuleName}`;
   }
 
+  public get InterfaceNameInContext() {
+    if (this.parent) {
+      const objectCodeModel = this.parent as CodeObject;
+      return `${objectCodeModel.ModuleName}.${this.InterfaceName}`;
+    }
+    return this.InterfaceName;
+  }
+
   public get DefineCode() {
     let result = this.InterfaceDefineCode;
     const moduleCode = this.ModuleDefineCode;
@@ -50,7 +58,7 @@ ${
   this.TsField.Fields
     .map(
       (field) =>
-        `  ['${field.Name}']: ${field.ToCodeModel(this).InterfaceName};`
+        `  ['${field.Name}']: ${field.ToCodeModel(this).InterfaceNameInContext};`
     )
     .concat(['  [propName: string]: any;'])
     .join('\n')

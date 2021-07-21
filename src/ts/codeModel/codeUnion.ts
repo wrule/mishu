@@ -22,9 +22,13 @@ export class CodeUnion extends CodeModel {
   public get InterfaceName() {
     return `(${
       this.TsField.Members
-        .map((member) => member.ToCodeModel().InterfaceName)
+        .map((member) => member.ToCodeModel(this.parent).InterfaceNameInContext)
         .join(' | ')
     })`;
+  }
+
+  public get InterfaceNameInContext() {
+    return this.InterfaceName;
   }
 
   public get DefineCode() {
