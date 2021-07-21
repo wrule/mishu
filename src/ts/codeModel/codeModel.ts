@@ -16,5 +16,7 @@ export abstract class CodeModel {
 
   abstract InterfaceName: string;
 
+  abstract InterfaceNameInContext: string;
+
   abstract DefineCode: string;
 }

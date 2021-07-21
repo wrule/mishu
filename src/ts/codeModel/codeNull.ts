@@ -13,6 +13,10 @@ export class CodeNull extends CodeModel {
     return 'null';
   }
 
+  public get InterfaceNameInContext() {
+    return this.InterfaceName;
+  }
+
   public get DefineCode() {
     return '';
   }

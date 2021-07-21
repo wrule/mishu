@@ -13,6 +13,10 @@ export class CodeUnknow extends CodeModel {
     return 'any';
   }
 
+  public get InterfaceNameInContext() {
+    return this.InterfaceName;
+  }
+
   public get DefineCode() {
     return '';
   }

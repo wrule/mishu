@@ -13,6 +13,10 @@ export class CodeDate extends CodeModel {
     return 'Date';
   }
 
+  public get InterfaceNameInContext() {
+    return this.InterfaceName;
+  }
+
   public get DefineCode() {
     return '';
   }

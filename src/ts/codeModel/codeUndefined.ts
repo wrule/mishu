@@ -13,6 +13,10 @@ export class CodeUndefined extends CodeModel {
     return 'undefined';
   }
 
+  public get InterfaceNameInContext() {
+    return this.InterfaceName;
+  }
+
   public get DefineCode() {
     return '';
   }

@@ -13,6 +13,10 @@ export class CodeString extends CodeModel {
     return 'string';
   }
 
+  public get InterfaceNameInContext() {
+    return this.InterfaceName;
+  }
+
   public get DefineCode() {
     return '';
   }

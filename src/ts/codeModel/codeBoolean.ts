@@ -13,6 +13,10 @@ export class CodeBoolean extends CodeModel {
     return 'boolean';
   }
 
+  public get InterfaceNameInContext() {
+    return this.InterfaceName;
+  }
+
   public get DefineCode() {
     return '';
   }
