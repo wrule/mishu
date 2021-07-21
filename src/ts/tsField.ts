@@ -1,7 +1,7 @@
 import { JsField } from '../js/jsField';
 import { Field } from '../proto/field';
-import { ModelCode } from './modelCode';
 import { IModel } from './model';
+import { CodeModel } from './codeModel/codeModel';
 
 export interface TsField extends Field {
   Clone(name?: string): TsField;
@@ -18,7 +18,7 @@ export interface TsField extends Field {
 
   ToModel(): IModel;
 
-  ToModelCode(): ModelCode;
+  ToCodeModel(): CodeModel;
 
   DomainTsFields(): TsField[];
 }

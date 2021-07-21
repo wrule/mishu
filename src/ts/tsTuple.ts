@@ -4,8 +4,8 @@ import { JsField } from '../js/jsField';
 import { JsUndefined } from '../js/jsUndefined';
 import { TupleField } from '../proto/tuple';
 import { EType } from '../type';
+import { CodeTuple } from './codeModel/codeTuple';
 import { BeforeCompare, BeforeContain, BeforeDefine, BeforeMerge, BeforeUpdate } from './decorators';
-import { ModelCode } from './modelCode';
 import { IModel } from './model';
 import { ModelLoader } from './modelLoader';
 import { TsField } from './tsField';
@@ -146,8 +146,8 @@ export class TsTuple extends TupleField implements TsField {
     };
   }
 
-  public ToModelCode() {
-    return new ModelCode(this.Name);
+  public ToCodeModel() {
+    return new CodeTuple(this);
   }
 
   public DomainTsFields(): TsField[] {

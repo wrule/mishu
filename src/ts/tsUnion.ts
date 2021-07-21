@@ -2,8 +2,8 @@
 import { JsField } from '../js/jsField';
 import { UnionField } from '../proto/union';
 import { EType } from '../type';
+import { CodeUnion } from './codeModel/codeUnion';
 import { BeforeCompare, BeforeContain, BeforeDefine, BeforeMerge, BeforeUpdate } from './decorators';
-import { ModelCode } from './modelCode';
 import { IModel } from './model';
 import { ModelLoader } from './modelLoader';
 import { TsField } from './tsField';
@@ -96,8 +96,8 @@ export class TsUnion extends UnionField implements TsField {
     };
   }
 
-  public ToModelCode() {
-    return new ModelCode(this.Name);
+  public ToCodeModel() {
+    return new CodeUnion(this);
   }
 
   public DomainTsFields(): TsField[] {

@@ -2,7 +2,7 @@ import { JsField } from '../js/jsField';
 import { Field } from '../proto/field';
 import { EType } from '../type';
 import { BeforeCompare, BeforeContain, BeforeDefine, BeforeMerge, BeforeUpdate } from './decorators';
-import { ModelCode } from './modelCode';
+import { CodeBoolean } from './codeModel/codeBoolean';
 import { IModel } from './model';
 import { ModelLoader } from './modelLoader';
 import { TsField } from './tsField';
@@ -53,8 +53,8 @@ export class TsBoolean extends Field implements TsField {
     };
   }
 
-  public ToModelCode() {
-    return new ModelCode('boolean');
+  public ToCodeModel() {
+    return new CodeBoolean(this);
   }
 
   public DomainTsFields(): TsField[] {

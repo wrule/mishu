@@ -20,6 +20,6 @@ const jsonObject = {
 
 const jsField = JsFactory.Create('rsp', jsonObject);
 const tsField = jsField.ToTs();
-const modelCode = tsField.ToModelCode();
+const modelCode = tsField.ToCodeModel();
 console.log(modelCode.InterfaceName);
-console.log(modelCode.Define);
+console.log(modelCode.DefineCode);

@@ -5,12 +5,12 @@ import { JsUndefined } from '../js/jsUndefined';
 import { ObjectField } from '../proto/object';
 import { EType } from '../type';
 import { BeforeCompare, BeforeContain, BeforeDefine, BeforeMerge, BeforeUpdate } from './decorators';
-import { ModelCode } from './modelCode';
 import { IModel } from './model';
 import { ModelLoader } from './modelLoader';
 import { TsField } from './tsField';
 import { TsUndefined } from './tsUndefined';
 import { TsUnion } from './tsUnion';
+import { CodeObject } from './codeModel/codeObject';
 
 export class TsObject extends ObjectField implements TsField {
   constructor(
@@ -166,8 +166,8 @@ export class TsObject extends ObjectField implements TsField {
     };
   }
 
-  public ToModelCode() {
-    return new ModelCode(this.Name);
+  public ToCodeModel() {
+    return new CodeObject(this);
   }
 
   public DomainTsFields(): TsField[] {

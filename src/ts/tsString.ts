@@ -1,8 +1,8 @@
 import { JsField } from '../js/jsField';
 import { Field } from '../proto/field';
 import { EType } from '../type';
+import { CodeString } from './codeModel/codeString';
 import { BeforeCompare, BeforeContain, BeforeDefine, BeforeMerge, BeforeUpdate } from './decorators';
-import { ModelCode } from './modelCode';
 import { IModel } from './model';
 import { ModelLoader } from './modelLoader';
 import { TsField } from './tsField';
@@ -53,8 +53,8 @@ export class TsString extends Field implements TsField {
     };
   }
 
-  public ToModelCode() {
-    return new ModelCode('string');
+  public ToCodeModel() {
+    return new CodeString(this);
   }
 
   public DomainTsFields(): TsField[] {
