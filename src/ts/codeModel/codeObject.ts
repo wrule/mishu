@@ -84,6 +84,8 @@ ${
       .join('\n\n')
       .split('\n')
       .map((line) => `  ${line}`)
+      // TODO 这里正确的，但是没有仔细论证
+      .map((line) => line.trim() ? line : '')
       .join('\n');
     return `
 //#region ${this.ModuleName}模块定义，此模块包含${this.InterfaceName}接口下所有子级接口定义
