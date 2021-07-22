@@ -57,8 +57,4 @@ export class TsBoolean extends Field implements TsField {
   public ToCodeModel(parent?: CodeModel) {
     return new CodeBoolean(this, parent);
   }
-
-  public DomainTsFields(): TsField[] {
-    return [];
-  }
 }

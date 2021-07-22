@@ -132,8 +132,4 @@ export class TsArray extends ArrayField implements TsField {
   public ToCodeModel(parent?: CodeModel) {
     return new CodeArray(this, parent);
   }
-
-  public DomainTsFields(): TsField[] {
-    return this.Element.DomainTsFields();
-  }
 }

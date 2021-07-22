@@ -100,12 +100,4 @@ export class TsUnion extends UnionField implements TsField {
   public ToCodeModel(parent?: CodeModel) {
     return new CodeUnion(this, parent);
   }
-
-  public DomainTsFields(): TsField[] {
-    const result: TsField[] = [];
-    this.Members.forEach((member) => {
-      result.push(...member.DomainTsFields());
-    });
-    return result;
-  }
 }

@@ -56,8 +56,4 @@ export class TsUnknow extends Field implements TsField {
   public ToCodeModel(parent?: CodeModel) {
     return new CodeUnknow(this, parent);
   }
-
-  public DomainTsFields(): TsField[] {
-    return [];
-  }
 }

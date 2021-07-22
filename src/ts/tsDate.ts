@@ -57,8 +57,4 @@ export class TsDate extends Field implements TsField {
   public ToCodeModel(parent?: CodeModel) {
     return new CodeDate(this, parent);
   }
-
-  public DomainTsFields(): TsField[] {
-    return [];
-  }
 }

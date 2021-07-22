@@ -57,8 +57,4 @@ export class TsUndefined extends Field implements TsField {
   public ToCodeModel(parent?: CodeModel) {
     return new CodeUndefined(this, parent);
   }
-
-  public DomainTsFields(): TsField[] {
-    return [];
-  }
 }

@@ -57,8 +57,4 @@ export class TsNumber extends Field implements TsField {
   public ToCodeModel(parent?: CodeModel) {
     return new CodeNumber(this, parent);
   }
-
-  public DomainTsFields(): TsField[] {
-    return [];
-  }
 }

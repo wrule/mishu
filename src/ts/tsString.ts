@@ -57,8 +57,4 @@ export class TsString extends Field implements TsField {
   public ToCodeModel(parent?: CodeModel) {
     return new CodeString(this, parent);
   }
-
-  public DomainTsFields(): TsField[] {
-    return [];
-  }
 }

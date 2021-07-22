@@ -150,12 +150,4 @@ export class TsTuple extends TupleField implements TsField {
   public ToCodeModel(parent?: CodeModel) {
     return new CodeTuple(this, parent);
   }
-
-  public DomainTsFields(): TsField[] {
-    const result: TsField[] = [];
-    this.Elements.forEach((element) => {
-      result.push(...element.DomainTsFields());
-    });
-    return result;
-  }
 }

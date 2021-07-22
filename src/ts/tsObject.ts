@@ -170,8 +170,4 @@ export class TsObject extends ObjectField implements TsField {
   public ToCodeModel(parent?: CodeModel) {
     return new CodeObject(this, parent);
   }
-
-  public DomainTsFields(): TsField[] {
-    return [this];
-  }
 }
