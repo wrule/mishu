@@ -23,10 +23,10 @@ export class CodeUnion extends CodeModel {
     return result;
   }
 
-  public get InterfaceName() {
+  public get InterfaceName(): string {
     return `(${
       this.TsField.Members
-        .map((member) => member.ToCodeModel(this.parent).InterfaceNameInContext)
+        .map((member) => member.ToCodeModel(this).InterfaceNameInContext)
         .join(' | ')
     })`;
   }

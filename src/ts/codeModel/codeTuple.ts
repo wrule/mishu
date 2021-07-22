@@ -23,10 +23,10 @@ export class CodeTuple extends CodeModel {
     return result;
   }
 
-  public get InterfaceName() {
+  public get InterfaceName(): string {
     return `[${
       this.TsField.Elements
-        .map((element) => element.ToCodeModel(this.parent).InterfaceNameInContext)
+        .map((element) => element.ToCodeModel(this).InterfaceNameInContext)
         .join(', ')
     }]`;
   }

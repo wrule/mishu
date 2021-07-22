@@ -19,10 +19,10 @@ export class CodeArray extends CodeModel {
     ];
   }
 
-  public get InterfaceName() {
+  public get InterfaceName(): string {
     return `${
       this.TsField.Element
-        .ToCodeModel(this.parent)
+        .ToCodeModel(this)
         .InterfaceNameInContext
     }[]`;
   }
