@@ -13,6 +13,16 @@ export class CodeUnion extends CodeModel {
     return this.tsField as TsUnion;
   }
 
+  public SelfCodeModels(): CodeModel[] {
+    const result: CodeModel[] = [];
+    this.TsField.Members.forEach((member) => {
+      result.push(
+        ...member.ToCodeModel(this).SelfCodeModels()
+      );
+    });
+    return result;
+  }
+
   public ModuleCodeModels(): CodeModel[] {
     return this.TsField.DomainTsFields()
       .map((field) => field.ToCodeModel(this));

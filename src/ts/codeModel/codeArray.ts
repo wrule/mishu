@@ -13,6 +13,12 @@ export class CodeArray extends CodeModel {
     return this.tsField as TsArray;
   }
 
+  public SelfCodeModels(): CodeModel[] {
+    return [
+      ...this.TsField.Element.ToCodeModel(this).SelfCodeModels()
+    ];
+  }
+
   public ModuleCodeModels(): CodeModel[] {
     return this.TsField.DomainTsFields()
       .map((field) => field.ToCodeModel(this));

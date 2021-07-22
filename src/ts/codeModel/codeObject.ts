@@ -14,6 +14,10 @@ export class CodeObject extends CodeModel {
     return this.tsField as TsObject;
   }
 
+  public SelfCodeModels(): CodeModel[] {
+    return [this];
+  }
+
   /**
    * 模块内的CodeModel列表
    * @returns CodeModel列表

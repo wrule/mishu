@@ -13,6 +13,16 @@ export class CodeTuple extends CodeModel {
     return this.tsField as TsTuple;
   }
 
+  public SelfCodeModels(): CodeModel[] {
+    const result: CodeModel[] = [];
+    this.TsField.Elements.forEach((element) => {
+      result.push(
+        ...element.ToCodeModel(this).SelfCodeModels()
+      );
+    });
+    return result;
+  }
+
   public ModuleCodeModels(): CodeModel[] {
     return this.TsField.DomainTsFields()
       .map((field) => field.ToCodeModel(this));
