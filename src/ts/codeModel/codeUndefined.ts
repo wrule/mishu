@@ -9,6 +9,10 @@ export class CodeUndefined extends CodeModel {
     super(tsField, parent);
   }
 
+  public SelfCodeModels(): CodeModel[] {
+    return [];
+  }
+
   public ModuleCodeModels(): CodeModel[] {
     return [];
   }
