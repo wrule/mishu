@@ -6,8 +6,5 @@ import { EType } from '../type';
 export interface IModel {
   name: string;
   type: EType;
-  fields?: IModel[];
-  element?: IModel;
-  elements?: IModel[];
-  members?: IModel[];
+  children?: IModel[];
 }

@@ -143,7 +143,7 @@ export class TsTuple extends TupleField implements TsField {
     return {
       type: this.Type,
       name: this.Name,
-      elements: this.Elements.map((element) => element.ToModel()),
+      children: this.Elements.map((element) => element.ToModel()),
     };
   }
 

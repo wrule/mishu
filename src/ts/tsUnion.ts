@@ -93,7 +93,7 @@ export class TsUnion extends UnionField implements TsField {
     return {
       type: this.Type,
       name: this.Name,
-      members: this.Members.map((member) => member.ToModel()),
+      children: this.Members.map((member) => member.ToModel()),
     };
   }
 

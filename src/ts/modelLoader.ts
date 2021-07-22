@@ -37,7 +37,7 @@ export class ModelLoader {
       case EType.Date:
         return new TsDate(model.name);
       case EType.Object: {
-        const fields = model.fields;
+        const fields = model.children;
         if (fields) {
           return new TsObject(
             model.name,
@@ -48,37 +48,37 @@ export class ModelLoader {
             ),
           );
         }
-        throw new Error(`${model.name}下没有fields节点`);
+        throw new Error(`${model.name}下子级节点缺失`);
       }
       case EType.Array: {
-        const element = model.element;
-        if (element) {
+        const children = model.children;
+        if (children && children.length > 0) {
           return new TsArray(
             model.name,
-            ModelLoader.Load(element),
+            ModelLoader.Load(children[0]),
           );
         }
-        throw new Error(`${model.name}下没有element节点`);
+        throw new Error(`${model.name}下子级节点缺失`);
       }
       case EType.Tuple: {
-        const elements = model.elements;
+        const elements = model.children;
         if (elements) {
           return new TsTuple(
             model.name,
             elements.map((element) => ModelLoader.Load(element)),
           );
         }
-        throw new Error(`${model.name}下没有elements节点`);
+        throw new Error(`${model.name}下子级节点缺失`);
       } break;
       case EType.Union: {
-        const members = model.members;
+        const members = model.children;
         if (members) {
           return new TsUnion(
             model.name,
             members.map((member) => ModelLoader.Load(member)),
           );
         }
-        throw new Error(`${model.name}下没有members节点`);
+        throw new Error(`${model.name}下子级节点缺失`);
       }
       default:
         return new TsUnknow(model.name);

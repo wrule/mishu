@@ -125,7 +125,7 @@ export class TsArray extends ArrayField implements TsField {
     return {
       type: this.Type,
       name: this.Name,
-      element: this.Element.ToModel(),
+      children: [this.Element.ToModel()],
     };
   }
 

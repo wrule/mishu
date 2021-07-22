@@ -163,7 +163,7 @@ export class TsObject extends ObjectField implements TsField {
     return {
       type: this.Type,
       name: this.Name,
-      fields: this.Fields.map((field) => field.ToModel()),
+      children: this.Fields.map((field) => field.ToModel()),
     };
   }
 
