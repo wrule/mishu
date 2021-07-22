@@ -23,11 +23,6 @@ export class CodeTuple extends CodeModel {
     return result;
   }
 
-  public ModuleCodeModels(): CodeModel[] {
-    return this.TsField.DomainTsFields()
-      .map((field) => field.ToCodeModel(this));
-  }
-
   public get ModuleName() {
     const name = this.Name.trim() || 'any';
     const first = name.substr(0, 1).toUpperCase();

@@ -19,15 +19,15 @@ export class CodeObject extends CodeModel {
   }
 
   /**
-   * 模块内的CodeModel列表
+   * 覆盖实现模块内的CodeModel列表
    * @returns CodeModel列表
    */
-   public ModuleCodeModels(): CodeModel[] {
-    const tsFields: TsField[] = [];
+  public ModuleCodeModels(): CodeModel[] {
+    const result: CodeModel[] = [];
     this.TsField.Fields.forEach((field) => {
-      tsFields.push(...field.DomainTsFields());
+      result.push(...field.ToCodeModel(this).SelfCodeModels());
     });
-    return tsFields.map((tsField) => tsField.ToCodeModel(this));
+    return result;
   }
 
   /**

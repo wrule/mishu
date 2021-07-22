@@ -13,10 +13,6 @@ export class CodeString extends CodeModel {
     return [];
   }
 
-  public ModuleCodeModels(): CodeModel[] {
-    return [];
-  }
-
   public get InterfaceName() {
     return 'string';
   }

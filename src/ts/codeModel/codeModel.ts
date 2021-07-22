@@ -16,7 +16,9 @@ export abstract class CodeModel {
 
   abstract SelfCodeModels(): CodeModel[];
 
-  abstract ModuleCodeModels(): CodeModel[];
+  public ModuleCodeModels(): CodeModel[] {
+    return this.SelfCodeModels();
+  }
 
   abstract InterfaceName: string;
 
