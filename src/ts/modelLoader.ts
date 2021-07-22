@@ -85,7 +85,7 @@ export class ModelLoader {
     }
   }
 
-  private static flattener(
+  private static flatten(
     model: IModel,
     path: string = '0',
   ): IModel[] {
@@ -97,16 +97,60 @@ export class ModelLoader {
     if (model.children && model.children.length > 0) {
       model.children.forEach((child, index) => {
         result.push(
-          ...ModelLoader.flattener(child, `${path}-${index}`)
+          ...ModelLoader.flatten(child, `${path}-${index}`)
         );
       });
     }
     return result;
   }
 
-  public static Flattener(
+  public static Flatten(
     model: IModel,
   ): IModel[] {
-    return ModelLoader.flattener(model, '0');
+    return ModelLoader.flatten(model, '0');
+  }
+
+  private static IsDirectChildren(
+    parent: IModel,
+    children: IModel,
+  ) {
+    if (parent.path && children.path) {
+      const re = new RegExp(`^${parent.path}-\\d+$`);
+      return re.test(children.path);
+    }
+    return false;
+  }
+
+  private static pile(
+    curModel: IModel,
+    modelList: IModel[],
+  ) {
+    const result: IModel = {
+      ...curModel,
+      children: undefined,
+      path: undefined,
+    };
+    const children = modelList
+      .filter((model) => ModelLoader.IsDirectChildren(curModel, model))
+      .map((model) => ModelLoader.pile(model, modelList));
+    if (children.length > 0) {
+      result.children = children;
+    }
+    return result;
+  }
+
+  public static Pile(modelList: IModel[]) {
+    const lengthNums = modelList
+      .filter((model) => model.path)
+      .map((model) => (model.path as string).length);
+    if (lengthNums.length > 0) {
+      const minLengthNum = Math.min(...lengthNums);
+      const rootModels = modelList
+        .filter((model) => model.path?.length === minLengthNum);
+      return rootModels
+        .map((model) => ModelLoader.pile(model, modelList));
+    } else {
+      return [];
+    }
   }
 }

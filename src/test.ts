@@ -39,8 +39,13 @@ const jsonObject = {
 };
 
 const tsField = TS(jsonObject, 'rsp');
+console.log(tsField.Hash());
 const model = tsField.ToModel();
-const list = ModelLoader.Flattener(model);
-console.log(list);
+const list = ModelLoader.Flatten(model);
+// console.log(list);
+const models = ModelLoader.Pile(list);
+// console.log(models);
+const tsField2 = ModelLoader.Load(models[0]);
+console.log(tsField2.Hash());
 // console.log(modelCode.InterfaceNameInContext);
 // fs.writeFileSync('output/output.ts', modelCode.DefineCode);
