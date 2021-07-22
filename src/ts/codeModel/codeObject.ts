@@ -46,8 +46,8 @@ export class CodeObject extends CodeModel {
   }
 
   public get InterfaceNameInContext() {
-    if (this.parent) {
-      const objectCodeModel = this.parent as CodeObject;
+    const objectCodeModel = this.ParentObjectCodeModel();
+    if (objectCodeModel) {
       return `${objectCodeModel.ModuleName}.${this.InterfaceName}`;
     }
     return this.InterfaceName;

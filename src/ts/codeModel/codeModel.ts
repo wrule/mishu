@@ -1,5 +1,6 @@
 import { EType } from '../../type';
 import { TsField } from '../tsField';
+import { CodeObject } from './codeObject';
 
 export abstract class CodeModel {
   constructor(
@@ -15,12 +16,12 @@ export abstract class CodeModel {
     return this.parent;
   }
 
-  public ParentObjectCodeModel(): CodeModel | undefined {
+  public ParentObjectCodeModel(): CodeObject | undefined {
     let result = this.parent;
     while (result && result.TsField.Type !== EType.Object) {
       result = result.parent;
     }
-    return result;
+    return result as CodeObject | undefined;
   }
 
   public ModuleCodeModels(): CodeModel[] {
