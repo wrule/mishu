@@ -14,11 +14,13 @@ export abstract class CodeModel {
     return this.parent;
   }
 
-  abstract SelfCodeModels(): CodeModel[];
-
   public ModuleCodeModels(): CodeModel[] {
     return this.SelfCodeModels();
   }
+
+  abstract SelfCodeModels(): CodeModel[];
+
+  abstract TsField: TsField;
 
   abstract InterfaceName: string;
 
