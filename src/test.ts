@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { TS, TSCode } from './index';
+import { TSCode } from './index';
 
 const jsonObject = {
   "list": [
