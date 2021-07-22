@@ -9,6 +9,10 @@ export class CodeUnknow extends CodeModel {
     super(tsField, parent);
   }
 
+  public get TsField(): TsUnknow {
+    return this.tsField;
+  }
+
   public SelfCodeModels(): CodeModel[] {
     return [];
   }

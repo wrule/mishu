@@ -1,6 +1,5 @@
 import { CodeModel } from './codeModel';
 import { TsObject } from '../tsObject';
-import { TsField } from '../tsField';
 
 export class CodeObject extends CodeModel {
   constructor(

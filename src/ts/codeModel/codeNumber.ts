@@ -9,6 +9,10 @@ export class CodeNumber extends CodeModel {
     super(tsField, parent);
   }
 
+  public get TsField(): TsNumber {
+    return this.tsField;
+  }
+
   public SelfCodeModels(): CodeModel[] {
     return [];
   }

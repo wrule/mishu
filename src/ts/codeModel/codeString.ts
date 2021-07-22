@@ -9,6 +9,10 @@ export class CodeString extends CodeModel {
     super(tsField, parent);
   }
 
+  public get TsField(): TsString {
+    return this.tsField;
+  }
+
   public SelfCodeModels(): CodeModel[] {
     return [];
   }

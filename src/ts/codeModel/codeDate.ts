@@ -9,6 +9,10 @@ export class CodeDate extends CodeModel {
     super(tsField, parent);
   }
 
+  public get TsField(): TsDate {
+    return this.tsField;
+  }
+
   public SelfCodeModels(): CodeModel[] {
     return [];
   }

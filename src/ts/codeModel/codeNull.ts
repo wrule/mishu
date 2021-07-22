@@ -9,6 +9,10 @@ export class CodeNull extends CodeModel {
     super(tsField, parent);
   }
 
+  public get TsField(): TsNull {
+    return this.tsField;
+  }
+
   public SelfCodeModels(): CodeModel[] {
     return [];
   }

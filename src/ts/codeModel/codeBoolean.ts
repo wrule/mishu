@@ -9,6 +9,10 @@ export class CodeBoolean extends CodeModel {
     super(tsField, parent);
   }
 
+  public get TsField(): TsBoolean {
+    return this.tsField;
+  }
+
   public SelfCodeModels(): CodeModel[] {
     return [];
   }
