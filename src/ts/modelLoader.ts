@@ -69,7 +69,7 @@ export class ModelLoader {
           );
         }
         throw new Error(`${model.name}下子级节点缺失`);
-      } break;
+      }
       case EType.Union: {
         const members = model.children;
         if (members) {
