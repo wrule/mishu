@@ -3,9 +3,13 @@ import { TS, TSCode } from './index';
 
 const jsonObject = {
   "list": [
-    { "name": "sdf", "age": 14 },
-    { "name": "wrule", "age": 72 }
+    [ { "name": "sdf", "age": 14, "mores": [ { "address": "sh" } ] } ],
+    [ { "name": "wrule", "age": 72, "mores": [ { "address": "sh" } ] } ]
   ],
+  "test1": [1, true, "nish", {
+    "ui": true,
+    "srv": false
+  }],
   "name": "jimao",
   "sex": true,
   "age": 99,
