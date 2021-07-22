@@ -1,5 +1,6 @@
 import fs from 'fs';
-import { TSCode } from './index';
+import { TS, TSCode } from './index';
+import { ModelLoader } from './ts/modelLoader';
 
 const jsonObject = {
   "list": [
@@ -37,6 +38,9 @@ const jsonObject = {
   "unknow": []
 };
 
-const modelCode = TSCode(jsonObject, 'rsp');
-console.log(modelCode.InterfaceNameInContext);
-fs.writeFileSync('output/output.ts', modelCode.DefineCode);
+const tsField = TS(jsonObject, 'rsp');
+const model = tsField.ToModel();
+const list = ModelLoader.Flattener(model);
+console.log(list);
+// console.log(modelCode.InterfaceNameInContext);
+// fs.writeFileSync('output/output.ts', modelCode.DefineCode);

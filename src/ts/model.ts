@@ -7,4 +7,5 @@ export interface IModel {
   name: string;
   type: EType;
   children?: IModel[];
+  path?: string;
 }

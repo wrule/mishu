@@ -84,4 +84,29 @@ export class ModelLoader {
         return new TsUnknow(model.name);
     }
   }
+
+  private static flattener(
+    model: IModel,
+    path: string = '0',
+  ): IModel[] {
+    const result: IModel[] = [{
+      ...model,
+      children: undefined,
+      path,
+    }];
+    if (model.children && model.children.length > 0) {
+      model.children.forEach((child, index) => {
+        result.push(
+          ...ModelLoader.flattener(child, `${path}-${index}`)
+        );
+      });
+    }
+    return result;
+  }
+
+  public static Flattener(
+    model: IModel,
+  ): IModel[] {
+    return ModelLoader.flattener(model, '0');
+  }
 }
