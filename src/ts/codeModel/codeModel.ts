@@ -14,7 +14,7 @@ export abstract class CodeModel {
     return this.parent;
   }
 
-  abstract MyCodeModels(): CodeModel[];
+  abstract SelfCodeModels(): CodeModel[];
 
   abstract ModuleCodeModels(): CodeModel[];
 
